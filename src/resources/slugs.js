@@ -14,6 +14,7 @@ const SLUGS = {
     usersAgreement: '/usersAgreement',
     // auth
     login: '/login',
+    registration: '/registration',
 };
 
 export default SLUGS;
