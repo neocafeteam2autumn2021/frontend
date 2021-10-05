@@ -126,7 +126,7 @@ const useStyles = createUseStyles((theme) => ({
     },
 }));
 
-function LoginComponent() {
+function RegistrationComponent() {
     const theme = useTheme();
     const classes = useStyles({ theme });
     // const dispatch = useDispatch();
@@ -237,4 +237,4 @@ function LoginComponent() {
     );
 }
 
-export default LoginComponent;
+export default RegistrationComponent;
