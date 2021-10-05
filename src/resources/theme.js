@@ -1,9 +1,11 @@
 const color = {
-    lightWhite: '#FAFAFA',
-    brightBlue: '#3498db',
-    darkGrayishBlue: '#001529',
-    baseWhite: '#F0F2F5',
-    grayishBlue: '#A4A6B3',
+    tundora: '#464646',
+    gunPowder: '#4A4754',
+    frenchGray: '#C2C1C8',
+    dustyGray: '#9B9B9B',
+    mineShaft: '#383838',
+    tuna: '#3D3E48',
+    emerald: '#4CC179',
     grayishBlue2: '#9fa2b4',
     grayishBlue3: '#bdc3c7',
     lightBlue: '#3751FF',
@@ -16,14 +18,21 @@ const color = {
 
 const typography = {
     blockTitle: {
-        fontWeight: 500,
-        fontSize: 24,
-        lineHeight: '28px',
+        fontWeight: 700,
+        fontSize: '58px',
+        lineHeight: '66.64px',
     },
-    smallSubtitle: {
-        fontSize: 12,
-        lineHeight: '16px',
-        letterSpacing: '0.1px'
+    kicker: {
+        fontWeight: 700,
+        fontSize: 16,
+    },
+    subtitle: {
+        fontWeight: 700,
+        fontSize: 16,
+    },
+    button: {
+        fontWeight: 700,
+        fontSize: 18
     },
     link: {
         fontWeight: '600',
