@@ -1,44 +1,41 @@
 import React from 'react';
-import { any, arrayOf, func, string } from 'prop-types';
-import { Column, Row } from 'simple-flexbox';
+import { arrayOf, func, string } from 'prop-types';
+import { Column } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
-import CollapsibleContent from '../../components/collapsible/CollapsibleContent';
 import { useSidebar } from '../../hooks/useSidebar';
 
 const useStyles = createUseStyles({
     activeContainer: {
-        backgroundColor: '#37ABFF;'
+        backgroundColor: 'rgba(255, 255, 255, 0.23)'
     },
     container: {
         display: 'flex',
-        height: 56,
+        height: 100,
+        width: 70,
         cursor: 'pointer',
+        borderRadius: '10px',
+        marginTop: 30,
         '&:hover': {
-            backgroundColor: '#37ABFF;'
+            backgroundColor: 'rgba(255, 255, 255, 0.23)'
         },
-        paddingLeft: ({ level }) => 16 * level,
         transition: 'all 0.2s ease-in-out'
     },
     title: {
-        fontSize: '16px',
+        fontSize: '15px',
         lineHeight: '19px',
-        letterSpacing: '0.2px',
-        color: '#FAFAFA',
-        marginLeft: 24
+        color: '#FFFFFF',
+        textShadow: '0px 2px 12px rgba(0, 0, 0, 0.1)'
     }
 });
 
-function MenuItemComponent({ children, icon: Icon, id, items = [], level = 1, onClick, title }) {
+function MenuItemComponent({ image, alt, id, items = [], onClick, title }) {
     const theme = useTheme();
-    const isCollapsible = children && children.length > 0;
-    const { isExpanded, isActive, onItemClick } = useSidebar({
-        isCollapsible,
+    const { isActive, onItemClick } = useSidebar({
         item: id,
         items
     });
-    const classes = useStyles({ theme, level, isActive });
+    const classes = useStyles({ theme, isActive });
     const classNameContainer = [classes.container, isActive && classes.activeContainer].join(' ');
-    const iconColor = isActive ? theme.color.paleBlue : theme.color.grayishBlue2;
 
     function onItemClicked(e) {
         if (onClick) {
@@ -48,16 +45,9 @@ function MenuItemComponent({ children, icon: Icon, id, items = [], level = 1, on
     }
 
     return (
-        <Column key={id}>
-            <Row vertical='center' onClick={onItemClicked} className={classNameContainer}>
-                <Icon fill={iconColor} opacity={!isActive && '0.4'} />
-                <span className={classes.title}>{title}</span>
-            </Row>
-            {isCollapsible && (
-                <CollapsibleContent expanded={isExpanded}>
-                    {children.map((child) => child.type({ ...child.props }))}
-                </CollapsibleContent>
-            )}
+        <Column vertical='center' horizontal='center' key={id} onClick={onItemClicked} className={classNameContainer}>
+            <img src={image} alt={alt} />
+            <span className={classes.title}>{title}</span>
         </Column>
     );
 }
@@ -65,7 +55,6 @@ function MenuItemComponent({ children, icon: Icon, id, items = [], level = 1, on
 MenuItemComponent.defaultProps = {};
 
 MenuItemComponent.propTypes = {
-    children: any,
     icon: func,
     id: string,
     onClick: func,

@@ -26,18 +26,23 @@ const getMenuStyles = ({ theme }) => ({
     bmMenuWrap: {
         position: 'fixed',
         height: '100%',
-        width: 255,
-        zIndex: 30
+        width: 80,
+        zIndex: 30,
     },
     bmMenu: {
-        background: theme.color.darkGrayishBlue
+        background: theme.color.blueCharcoal,
     },
-    bmItem: {
-        outline: 'none',
-        '&:focus': {
-            outline: 'none'
-        }
+    bmItemList: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
+    // bmItem: {
+    //     outline: 'none',
+    //     '&:focus': {
+    //         outline: 'none'
+    //     }
+    // },
     bmMorphShape: {
         fill: theme.color.veryDarkGrayishBlue
     },
