@@ -107,7 +107,7 @@ const useStyles = createUseStyles((theme) => ({
         color: theme.color.frenchGray,
         marginTop: 39
     },
-    activeConfirmButton: {
+    activeButton: {
         backgroundColor: theme.color.emerald,
         color: 'white',
         marginTop: 39
@@ -182,7 +182,8 @@ function LoginComponent() {
         if (otp.otp === '' || final === null)
             return;
         final.confirm(otp.otp).then((result) => {
-            alert("Success")
+            result.user.getIdToken(true)
+            .then(latestToken => localStorage.setItem('userInfo', JSON.stringify(latestToken)))
         }).catch((err) => {
             setOtpWrong(true)
         })}
@@ -205,7 +206,9 @@ function LoginComponent() {
                         onChange={(e) => { setnumber(e.target.value) }}
                         required />
                   <div id="recaptcha-container"></div>
-                  <button className={`${classes.nextButton} ${classes.button}`} onClick={signin}>Далее</button>
+                  <button
+                    className={mynumber.length > 0 ? `${classes.activeButton} ${classes.button}` : `${classes.nextButton} ${classes.button}`}
+                    onClick={signin}>Далее</button>
                 </div>
                 <div className={classes.innerBlock} style={{ display: show ? "flex" : "none" }}>
                     <div className={classes.blockTitle}>
@@ -223,7 +226,7 @@ function LoginComponent() {
                         numInputs={6}
                          />
                     {otp && otp.otp.length === 6 && !otpWrong ?
-                        <button className={ `${classes.activeConfirmButton} ${classes.button}`}
+                        <button className={ `${classes.activeButton} ${classes.button}`}
                         onClick={ValidateOtp}>Подтвердить</button> :
                         <button className={ `${classes.confirmButton} ${classes.button}`}>Подтвердить</button>}
                     {timeLeft === 0 ?
