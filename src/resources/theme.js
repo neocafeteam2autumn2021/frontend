@@ -7,7 +7,8 @@ const color = {
     tuna: '#3D3E48',
     emerald: '#4CC179',
     blueCharcoal: '#010C25',
-    burntSienna: '#EE6363'
+    burntSienna: '#EE6363',
+    tunaDark: '#343545'
 };
 
 const typography = {

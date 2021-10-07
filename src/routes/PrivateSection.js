@@ -7,17 +7,19 @@ import PrivateRoutes from './PrivateRoutes';
 const useStyles = createUseStyles({
     container: {
         height: '100%',
-        minHeight: 850,
     },
     mainBlock: {
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
         marginLeft: 80,
         backgroundColor: ({ theme }) => theme.color.blueCharcoal,
         '@media (max-width: 1080px)': {
             marginLeft: 0
-        }
+        },
     },
     contentBlock: {
-        padding: 30,
+        padding: 0,
     }
 });
 

@@ -19,9 +19,7 @@ function SidebarComponent() {
 
     return (
         <Menu isMobile={isMobile}>
-            <div style={{ paddingTop: 13, paddingBottom: 100, width: 70, display: 'flex', justifyContent: 'center' }}>
-                <NotificationComponent />
-            </div>
+            <NotificationComponent />
             <MenuItem
                 id={SLUGS.menu}
                 title='Меню'

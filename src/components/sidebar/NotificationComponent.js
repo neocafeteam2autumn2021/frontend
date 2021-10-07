@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 const useStyles = createUseStyles((theme) => ({
     container: {
         cursor: 'pointer',
-        position: 'relative'
+        position: 'relative',
     },
     badge: {
         backgroundColor: theme.color.burntSienna,
@@ -32,10 +32,12 @@ function NotificationComponent(props) {
     }
 
     return (
-        <Row className={classes.container} onClick={onLogoClick}>
-            <img src={notification_img} alt='notification' />
-            <span className={classes.badge}>2</span>
-        </Row>
+        <div style={{ paddingTop: 13, paddingBottom: 100, width: 70, display: 'flex', justifyContent: 'center' }}>
+            <Row className={classes.container} onClick={onLogoClick}>
+                <img src={notification_img} alt='notification' />
+                <span className={classes.badge}>2</span>
+            </Row>
+        </div>
     );
 }
 

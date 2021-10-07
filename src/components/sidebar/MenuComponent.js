@@ -9,13 +9,13 @@ const getMenuStyles = ({ theme }) => ({
         height: 20,
         left: 25,
         top: 20,
-        zIndex: 19
+        zIndex: 0
     },
     bmBurgerBars: {
-        background: theme.color.veryDarkGrayishBlue
+        background: 'white'
     },
     bmBurgerBarsHover: {
-        background: theme.color.darkRed
+        background: 'red'
     },
     bmCrossButton: {
         display: 'none'
@@ -27,7 +27,7 @@ const getMenuStyles = ({ theme }) => ({
         position: 'fixed',
         height: '100%',
         width: 80,
-        zIndex: 30,
+        zIndex: 0,
     },
     bmMenu: {
         background: theme.color.blueCharcoal,
@@ -48,7 +48,7 @@ const getMenuStyles = ({ theme }) => ({
     },
     bmOverlay: {
         background: 'rgba(0, 0, 0, 0.3)',
-        zIndex: 20
+        // zIndex: 20
     }
 });
 
