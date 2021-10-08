@@ -28,9 +28,9 @@ function OrdersComponent() {
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
             ) : (
-              <>
+              <h1 style={{fontSize: '20px', color: 'white', padding: '100px'}}>
                 Orders
-              </>
+              </h1>
             )}
         </Column>
     );

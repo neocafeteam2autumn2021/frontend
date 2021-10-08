@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import menuCardInfo from '../../assets/images/menuCardInfo.png';
-import Modal from "../modal/Modal.js";
+import ModalInfo from "../modal/ModalInfo.js";
 import "./menuCard.css";
 import "../modal/Modal.css";
 
@@ -12,7 +12,7 @@ export default function MenuCard({menuCardImage, menuCardTitle}) {
   let price = 100;
   return (
       <div className="menuCard">
-        <Modal show={modal} close={Toggle} />
+        <ModalInfo show={modal} close={Toggle} />
         <div className="menuCardTitle">{menuCardTitle}</div>
         <div className="menuCardInfo" onClick={() => Toggle()}>
           <img src={menuCardInfo} alt="menuCardInfo" />

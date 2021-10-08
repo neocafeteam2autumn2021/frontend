@@ -8,7 +8,9 @@ const color = {
     emerald: '#4CC179',
     blueCharcoal: '#010C25',
     burntSienna: '#EE6363',
-    tunaDark: '#343545'
+    tunaDark: '#343545',
+    mako: '#464B56',
+    mercury: '#E9E9E9'
 };
 
 const typography = {

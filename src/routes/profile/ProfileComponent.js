@@ -28,9 +28,9 @@ function ProfileComponent() {
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
             ) : (
-              <>
+              <h1 style={{fontSize: '20px', color: 'white', padding: '100px'}}>
                 Profile
-              </>
+              </h1>
             )}
         </Column>
     );
