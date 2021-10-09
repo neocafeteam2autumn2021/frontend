@@ -9,13 +9,13 @@ const getMenuStyles = ({ theme }) => ({
         height: 20,
         left: 25,
         top: 20,
-        zIndex: 19
+        zIndex: 0
     },
     bmBurgerBars: {
-        background: theme.color.veryDarkGrayishBlue
+        background: 'white'
     },
     bmBurgerBarsHover: {
-        background: theme.color.darkRed
+        background: 'red'
     },
     bmCrossButton: {
         display: 'none'
@@ -26,24 +26,29 @@ const getMenuStyles = ({ theme }) => ({
     bmMenuWrap: {
         position: 'fixed',
         height: '100%',
-        width: 255,
-        zIndex: 30
+        width: 80,
+        zIndex: 0,
     },
     bmMenu: {
-        background: theme.color.darkGrayishBlue
+        background: theme.color.blueCharcoal,
     },
-    bmItem: {
-        outline: 'none',
-        '&:focus': {
-            outline: 'none'
-        }
+    bmItemList: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
+    // bmItem: {
+    //     outline: 'none',
+    //     '&:focus': {
+    //         outline: 'none'
+    //     }
+    // },
     bmMorphShape: {
         fill: theme.color.veryDarkGrayishBlue
     },
     bmOverlay: {
         background: 'rgba(0, 0, 0, 0.3)',
-        zIndex: 20
+        // zIndex: 20
     }
 });
 

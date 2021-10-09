@@ -12,7 +12,7 @@ import IconLogout from './icon-logout';
 import IconAdd from './icon-add';
 import IconActivity from './icon-activity';
 import IconProducts from './icon-products';
-import IconStatistics from './icon-statistics';
+import IconMenu from './icon-menu';
 import IconUsers from './icon-users';
 
 export {
@@ -30,6 +30,6 @@ export {
     IconAdd,
     IconActivity,
     IconProducts,
-    IconStatistics,
+    IconMenu,
     IconUsers
 };

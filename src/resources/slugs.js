@@ -1,8 +1,8 @@
 const SLUGS = {
     // private
-    statistics: '/statistics',
-    users: '/users',
-    products: '/products',
+    menu: '/menu',
+    orders: '/orders',
+    profile: '/profile',
     editProduct: '/products/editProduct/:id',
     createProduct: '/products/createProduct',
     categoryProducts: '/categoryProducts',

@@ -6,14 +6,11 @@ const color = {
     mineShaft: '#383838',
     tuna: '#3D3E48',
     emerald: '#4CC179',
-    grayishBlue2: '#9fa2b4',
-    grayishBlue3: '#bdc3c7',
-    lightBlue: '#3751FF',
-    lightGrayishBlack: '#E5E5E5', // background color
-    lightGrayishBlue2: '#DFE0EB',
-    paleBlue: '#DDE2FF',
-    paleBlueTransparent: 'rgba(221, 226, 255, 0.08)',
-    veryDarkGrayishBlue: '#373a47'
+    blueCharcoal: '#010C25',
+    burntSienna: '#EE6363',
+    tunaDark: '#343545',
+    mako: '#464B56',
+    mercury: '#E9E9E9'
 };
 
 const typography = {

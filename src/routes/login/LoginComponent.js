@@ -83,6 +83,7 @@ const useStyles = createUseStyles((theme) => ({
     button: {
         ...theme.typography.button,
         width: '100%',
+        cursor: 'pointer',
         borderRadius: 10,
         padding: [19.5, 0],
     },
@@ -183,7 +184,8 @@ function LoginComponent() {
             return;
         final.confirm(otp.otp).then((result) => {
             result.user.getIdToken(true)
-            .then(latestToken => localStorage.setItem('userInfo', JSON.stringify(latestToken)))
+            .then(latestToken => localStorage.setItem('userInfo', JSON.stringify(latestToken)));
+            alert("success")
         }).catch((err) => {
             setOtpWrong(true)
         })}

@@ -1,0 +1,43 @@
+.tabsContainer {
+  width: 100%;
+  padding: 0 0 0 32px;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tab-header {
+  height: fit-content;
+  margin: 40px 0;
+}
+
+.tab-header li {
+  display: inline;
+  border-radius: 30px;
+  line-height: 35px;
+  font-size: 20px;
+  margin: 20px 20px;
+  font-weight: 500;
+  padding: 16px 43.5px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+  
+.tab-header li.active,
+.tab-header li:hover {
+  background: rgba(255, 255, 255, 0.27);
+}
+.tab-content {
+  width: 100%;
+  overflow: hidden;
+}
+  
+.tab-child {
+  display: flex;
+  flex-wrap: wrap;
+  height: 450px;
+  /* height: 100%; */
+  overflow-y: scroll;
+}

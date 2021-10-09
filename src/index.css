@@ -20,8 +20,6 @@ h2,
 h3,
 h4,
 p,
-ul[class],
-ol[class],
 li,
 figure,
 figcaption,
@@ -67,6 +65,20 @@ button,
 textarea,
 select {
     font: inherit;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 button {

@@ -5,7 +5,7 @@ import LoadingComponent from '../../components/loading/LoadingComponent';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
 
-function StatisticsComponent() {
+function OrdersComponent() {
 
   const allStatistics = useSelector((state) => state.allStatistics);
   const { errorStatistics, loadingStatistics } = allStatistics;
@@ -28,12 +28,12 @@ function StatisticsComponent() {
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
             ) : (
-              <>
-                Statisitics
-              </>
+              <h1 style={{fontSize: '20px', color: 'white', padding: '100px'}}>
+                Orders
+              </h1>
             )}
         </Column>
     );
 }
 
-export default StatisticsComponent;
+export default OrdersComponent;
