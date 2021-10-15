@@ -183,6 +183,7 @@ function LoginComponent() {
         if (otp.otp === '' || final === null)
             return;
         final.confirm(otp.otp).then((result) => {
+            console.log(result)
             result.user.getIdToken(true)
             .then(latestToken => localStorage.setItem('userInfo', JSON.stringify(latestToken)));
             alert("success")
