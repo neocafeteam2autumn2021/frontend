@@ -37,12 +37,6 @@ const getMenuStyles = ({ theme }) => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    // bmItem: {
-    //     outline: 'none',
-    //     '&:focus': {
-    //         outline: 'none'
-    //     }
-    // },
     bmMorphShape: {
         fill: theme.color.veryDarkGrayishBlue
     },

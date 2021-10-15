@@ -31,8 +31,11 @@ function MainMenuComponent() {
               <LoadingComponent loading={loadingStatistics} />
             ) : (
               <>
-                <SearchInput />
-                <Tabs />
+                <div></div>
+                <>
+                  <SearchInput />
+                  <Tabs />
+                </>
               </>
             )}
         </Column>
