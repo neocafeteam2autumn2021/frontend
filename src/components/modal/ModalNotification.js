@@ -26,6 +26,9 @@ const ModalNotification = ({ show, close }) => {
                 <NotifCard />
                 <NotifCard />
                 <NotifCard />
+                <NotifCard />
+                <NotifCard />
+                <NotifCard />
             </main>
           </div>
         </div>

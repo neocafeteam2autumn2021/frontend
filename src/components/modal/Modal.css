@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  z-index: 35;
 }
 .modalNotifContainer {
   top: 0;
@@ -25,8 +25,8 @@
   border-radius: 20px;
 }
 .modalNotifContainer .modal {
-  width: 329px;
   height: 100%;
+  width: 329px;
   padding: 10px;
   border-radius: 0;
 }
@@ -45,7 +45,7 @@
 }
 .modalContainer .modal_notif-header {
   position: relative;
-  padding: 57px 0 0 0;
+  padding: 57px 0 30px 0;
   text-align: center;
 }
 .modalContainer .modal_header .close {
@@ -65,8 +65,15 @@
   padding: 0 0;
 }
 .modal-notif_content {
-  height: 100%;
-  scrollbar-width: none;
+  height: 500px;
+  overflow-y: scroll;
+}
+.modal-notif_content::-webkit-scrollbar {
+  display: none;
+}
+.modal-notif_content {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 .modal_content-title {
   font-weight: 500;

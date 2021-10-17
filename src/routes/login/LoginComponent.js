@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Column } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
-// import { useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { signin } from '../../redux/actions/userActions';
 // import LoadingComponent from '../../components/loading/LoadingComponent';
@@ -9,6 +9,8 @@ import { auth } from "../../firebase";
 import firebase from "firebase/app";
 import auth_back from "../../assets/images/auth_back.png";
 import OtpInput from 'react-otp-input';
+import { useHistory } from 'react-router';
+import SLUGS from '../../resources/slugs';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -130,7 +132,7 @@ const useStyles = createUseStyles((theme) => ({
 function LoginComponent() {
     const theme = useTheme();
     const classes = useStyles({ theme });
-    // const dispatch = useDispatch();
+    const history = useHistory();
 
     // const userLogIn = useSelector((state) => state.userSignin);
     // const { loading } = userLogIn;
@@ -163,7 +165,6 @@ function LoginComponent() {
         let verify = new firebase.auth.RecaptchaVerifier('recaptcha-container', {size: "invisible"});
         auth.signInWithPhoneNumber(mynumber, verify).then((result) => {
             setfinal(result);
-            alert("code sent")
             setTimeLeft(30)
             setshow(true);
         })
@@ -178,16 +179,31 @@ function LoginComponent() {
         setshow(false);
         }
 
+    const onChangePhone = (e) => {
+        let val = e.target.value;
+        let newVal = ""
+        if(val.length === 1 && mynumber.length < val.length) newVal = "+996 ("
+        else if(val.length === 9 && mynumber.length < val.length) newVal = val + ") "
+        else if(val.length === 13 && mynumber.length < val.length) newVal = val + " "
+        else if(val.length === 16 && mynumber.length < val.length) newVal = val + " "
+        else if(val.length < 20) newVal = val
+        else newVal = mynumber
+        setnumber(newVal)
+    }
+
     // Validate OTP
     const ValidateOtp = () => {
         if (otp.otp === '' || final === null)
             return;
         final.confirm(otp.otp).then((result) => {
-            console.log(result)
             result.user.getIdToken(true)
-            .then(latestToken => localStorage.setItem('userInfo', JSON.stringify(latestToken)));
-            alert("success")
+            .then(latestToken => {
+                const userInfo = { latestToken, mynumber};
+                localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                history.push(SLUGS.registration);
+            });
         }).catch((err) => {
+            alert(err)
             setOtpWrong(true)
         })}
 
@@ -206,7 +222,7 @@ function LoginComponent() {
                         value={mynumber}
                         className={classes.telInput}
                         type="tel" placeholder="+996 (000) 00 00 00"
-                        onChange={(e) => { setnumber(e.target.value) }}
+                        onChange={onChangePhone}
                         required />
                   <div id="recaptcha-container"></div>
                   <button
@@ -217,7 +233,7 @@ function LoginComponent() {
                     <div className={classes.blockTitle}>
                         СМС код
                     </div>
-                    <div className={classes.subTitle} >Код был отправлен на номер {mynumber}</div>
+                    <div className={classes.subTitle} >Код был отправлен на номер {mynumber.replaceAll(' ', '')}</div>
                     <div className={otpWrong ? `${classes.otpKicker} ${classes.otpKickerError}` : `${classes.otpKicker}`} >
                         {otpWrong ? 'Неверный код*' : 'Введите код'}</div>
                     <OtpInput

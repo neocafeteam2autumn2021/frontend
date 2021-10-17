@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Column } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
-// import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { signin } from '../../redux/actions/userActions';
 // import LoadingComponent from '../../components/loading/LoadingComponent';
 import auth_back from "../../assets/images/auth_back.png";
+import { USER_TOKEN_SUCCESS } from '../../redux/constants/userConstants';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -46,7 +47,8 @@ const useStyles = createUseStyles((theme) => ({
         width: '100%',
         borderRadius: 10,
         padding: [19.5, 0],
-        border: 'none'
+        border: 'none',
+        cursor: 'pointer'
     },
     nextButton: {
         backgroundColor: theme.color.gunPowder,
@@ -63,7 +65,7 @@ const useStyles = createUseStyles((theme) => ({
 function RegistrationComponent() {
     const theme = useTheme();
     const classes = useStyles({ theme });
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     // const userLogIn = useSelector((state) => state.userSignin);
     // const { loading } = userLogIn;
@@ -73,10 +75,22 @@ function RegistrationComponent() {
     const [surname, setSurname] = useState('');
     const [date, setDate] = useState('');
 
-    // Sent OTP
     const signin = (event) => {
         event.preventDefault();
-        alert("hi")}
+        let b = {...{name, surname, date}, ...JSON.parse(localStorage.getItem('userInfo'))};
+        localStorage.setItem('userInfoFull', JSON.stringify(b));
+        dispatch({ type: USER_TOKEN_SUCCESS, payload: b });
+        }
+    
+    const onChangeDate = (e) => {
+        let val = e.target.value
+        let newVal = ""
+        if(val.length === 2 && date.length < val.length) newVal = val + "."
+        else if(val.length === 5 && date.length < val.length) newVal = val + "."
+        else if(val.length < 11) newVal = val
+        else newVal = date
+        setDate(newVal)
+    }
 
     return (
         <Column className={classes.container}
@@ -107,7 +121,7 @@ function RegistrationComponent() {
                             value={date}
                             className={classes.telInput}
                             type="text" placeholder="Ваша дата рождения"
-                            onChange={(e) => { setDate(e.target.value) }}
+                            onChange={onChangeDate}
                             required />
                         <input
                             type="submit"

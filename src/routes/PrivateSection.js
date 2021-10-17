@@ -9,11 +9,8 @@ const useStyles = createUseStyles({
         height: '100%',
     },
     mainBlock: {
-        position: 'fixed',
-        width: '100%',
-        height: '100%',
-        zIndex: -2,
         marginLeft: 80,
+        height: '100vh',
         backgroundColor: ({ theme }) => theme.color.blueCharcoal,
         '@media (max-width: 1080px)': {
             marginLeft: 0
