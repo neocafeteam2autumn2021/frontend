@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import cancelModal from '../../assets/images/cancelModal.png';
 import InputSpinnerNumber from "../etc/InputSpinnerNumber";
+import "./modal.css";
 
 const ModalExtraOption = ({ show, close }) => {
     const [state, setState] = useState({

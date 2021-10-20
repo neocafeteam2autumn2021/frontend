@@ -41,6 +41,7 @@ body {
 ul[class],
 ol[class] {
     list-style: none;
+    list-style-type: none;
 }
 
 /* A elements that don't have a class get default styles */

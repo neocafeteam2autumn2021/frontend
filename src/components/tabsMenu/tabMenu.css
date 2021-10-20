@@ -1,19 +1,19 @@
-.tabsContainer {
+.tabsContainerMenu {
   width: 100%;
   padding: 0 0 0 32px;
 }
 
-.tabs {
+.tabsMenu {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.tab-header {
+.tabHeaderMenu {
   height: fit-content;
   margin: 40px 0;
 }
 
-.tab-header li {
+.tabHeaderMenu li {
   display: inline;
   border-radius: 30px;
   line-height: 35px;
@@ -25,18 +25,18 @@
   cursor: pointer;
 }
   
-.tab-header li.active,
-.tab-header li:hover {
+.tabHeaderMenu li.active,
+.tabHeaderMenu li:hover {
   background: rgba(255, 255, 255, 0.27);
 }
-.tab-content {
+.tabContentMenu {
   width: 100%;
 }
   
-.tab-child {
+.tabChildMenu {
   display: flex;
   flex-wrap: wrap;
-  height: 450px;
+  height: 465px;
   overflow-y: scroll;
 
   /* width: 1100px;
@@ -44,10 +44,10 @@
   flex-wrap: nowrap;
   overflow: auto; this for horizontal scroll */
 }
-.tab-child::-webkit-scrollbar {
+.tabChildMenu::-webkit-scrollbar {
   display: none;
 }
-.tab-child {
+.tabChildMenu {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }

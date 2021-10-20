@@ -1,7 +1,7 @@
 import React from "react";
-import "./tab.css";
-import Tab from "./tab";
-import TabPane from "./tab-pane";
+import "./tabMenu.css";
+import TabMenu from "./TabMenu";
+import TabPane from "./TabPane";
 import expresso from '../../assets/images/expresso.png';
 import whiteTea from '../../assets/images/whiteTea.png';
 import pepsi from '../../assets/images/pepsi.png';
@@ -9,11 +9,11 @@ import cinnamonBun from '../../assets/images/cinnamonBun.png';
 import cheeseCake from '../../assets/images/cheeseCake.png';
 import MenuCard from "../menuCards/MenuCard";
 
-export default function Tabs() {
+export default function TabsMenu() {
   let cinnamonBunTitle = "Булачка с корицей";
   return (
-      <div className="tabsContainer">
-        <Tab>
+      <div className="tabsContainerMenu">
+        <TabMenu>
           <TabPane name="Кофе" key="1">
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
@@ -71,7 +71,7 @@ export default function Tabs() {
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
           </TabPane>
-        </Tab>
+        </TabMenu>
       </div>
   );
 }

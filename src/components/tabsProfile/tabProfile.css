@@ -1,0 +1,51 @@
+.tabs {
+  width: 100%;
+  padding: 0 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tab-header {
+  height: fit-content;
+  margin: 40px 0 !important;
+}
+
+.tab-header li {
+  display: inline;
+  border-radius: 30px;
+  line-height: 35px;
+  font-size: 18px;
+  margin: 20px 20px;
+  font-weight: 500;
+  padding: 21px 14.5px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+  
+.tab-header li.active,
+.tab-header li:hover {
+  background: #FF9C68;
+}
+.tabContentProfile {
+  width: 100%;
+}
+  
+.tabChildProfile {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 525px;
+  overflow-y: scroll;
+
+  /* width: 1100px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto; this for horizontal scroll */
+}
+.tabChildProfile::-webkit-scrollbar {
+  display: none;
+}
+.tabChildProfile {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TabPane from "./tab-pane";
+import TabPaneProfile from "./TabPaneProfile";
 
-const Tabs = (props) => {
+const TabProfile = (props) => {
   const { children } = props;
   const [tabHeader, setTabHeader] = useState([]);
   const [childContent, setChildConent] = useState({});
@@ -36,10 +36,10 @@ const Tabs = (props) => {
             </li>
             ))}
         </ul>
-        <div className="tab-content">
+        <div className="tabContentProfile">
             {Object.keys(childContent).map((key) => {
             if (key === active) {
-                return <div className="tab-child" key={key}>{childContent[key]}</div>;
+                return <div className="tabChildProfile" key={key}>{childContent[key]}</div>;
             } else {
                 return null;
             }
@@ -49,13 +49,13 @@ const Tabs = (props) => {
   );
 };
 
-Tabs.propTypes = {
+TabProfile.propTypes = {
   children: function (props, propName, componentName) {
     const prop = props[propName];
 
     let error = null;
     React.Children.forEach(prop, function (child) {
-      if (child.type !== TabPane) {
+      if (child.type !== TabPaneProfile) {
         error = new Error(
           "`" + componentName + "` children should be of type `TabPane`."
         );
@@ -65,4 +65,4 @@ Tabs.propTypes = {
   }
 };
 
-export default Tabs;
+export default TabProfile;

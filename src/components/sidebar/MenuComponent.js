@@ -28,6 +28,7 @@ const getMenuStyles = ({ theme }) => ({
         height: '100%',
         width: 80,
         zIndex: 30,
+        transition: 'unset'
     },
     bmMenu: {
         background: theme.color.blueCharcoal,

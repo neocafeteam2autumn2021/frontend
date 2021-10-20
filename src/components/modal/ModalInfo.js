@@ -1,6 +1,7 @@
 import React from "react";
 import cancelModal from '../../assets/images/cancelModal.png';
 import сroissant from '../../assets/images/сroissant.png';
+import "./modal.css";
 
 const ModalInfo = ({ show, close }) => {
     

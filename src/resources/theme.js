@@ -10,7 +10,11 @@ const color = {
     burntSienna: '#EE6363',
     tunaDark: '#343545',
     mako: '#464B56',
-    mercury: '#E9E9E9'
+    mercury: '#E9E9E9',
+    ebonyClay: '#1E2432',
+    iron: '#DEDEDF',
+    atomicTangerine: '#FF9C68',
+    heliotrope: '#A489FE',
 };
 
 const typography = {

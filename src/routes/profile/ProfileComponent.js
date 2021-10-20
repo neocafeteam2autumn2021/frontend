@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Column } from 'simple-flexbox';
 import LoadingComponent from '../../components/loading/LoadingComponent';
+import TabsProfile from '../../components/tabsProfile/TabsProfile';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
 
@@ -28,9 +29,7 @@ function ProfileComponent() {
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
             ) : (
-              <h1 style={{fontSize: '20px', color: 'white', padding: '100px'}}>
-                Profile
-              </h1>
+              <TabsProfile />
             )}
         </Column>
     );

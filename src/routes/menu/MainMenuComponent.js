@@ -5,7 +5,7 @@ import LoadingComponent from '../../components/loading/LoadingComponent';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
 import SearchInput from '../../components/etc/SearchInput';
-import Tabs from '../../components/tabs/Tabs';
+import TabsMenu from '../../components/tabsMenu/TabsMenu';
 
 function MainMenuComponent() {
 
@@ -32,7 +32,7 @@ function MainMenuComponent() {
             ) : (
               <>
                   <SearchInput />
-                  <Tabs />
+                  <TabsMenu />
               </>
             )}
         </Column>

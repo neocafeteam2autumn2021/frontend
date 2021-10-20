@@ -1,6 +1,7 @@
 import React from "react";
 import cancelModal from '../../assets/images/cancelModal.png';
 import NotifCard from "../notifCards/NotifCard";
+import "./modal.css";
 
 const ModalNotification = ({ show, close }) => {
     
