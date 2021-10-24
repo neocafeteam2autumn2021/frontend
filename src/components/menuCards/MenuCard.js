@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import menuCardInfo from '../../assets/images/menuCardInfo.png';
 import ModalInfo from "../modal/ModalInfo.js";
 import "./menuCard.css";
-import "../modal/modal.css";
 
 export default function MenuCard({menuCardImage, menuCardTitle}) {
   

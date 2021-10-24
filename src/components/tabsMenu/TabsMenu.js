@@ -1,7 +1,7 @@
 import React from "react";
 import "./tabMenu.css";
 import TabMenu from "./TabMenu";
-import TabPane from "./TabPane";
+import TabMenuPane from "./TabMenuPane";
 import expresso from '../../assets/images/expresso.png';
 import whiteTea from '../../assets/images/whiteTea.png';
 import pepsi from '../../assets/images/pepsi.png';
@@ -14,7 +14,7 @@ export default function TabsMenu() {
   return (
       <div className="tabsContainerMenu">
         <TabMenu>
-          <TabPane name="Кофе" key="1">
+          <TabMenuPane name="Кофе" key="1">
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
@@ -30,8 +30,8 @@ export default function TabsMenu() {
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
             <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-          </TabPane>
-          <TabPane name="Чай" key="2">
+          </TabMenuPane>
+          <TabMenuPane name="Чай" key="2">
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>
@@ -41,8 +41,8 @@ export default function TabsMenu() {
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>
-          </TabPane>
-          <TabPane name="Напитки" key="3">
+          </TabMenuPane>
+          <TabMenuPane name="Напитки" key="3">
             <MenuCard menuCardImage={pepsi} menuCardTitle={"Pepsi"}/>
             <MenuCard menuCardImage={pepsi} menuCardTitle={"Pepsi"}/>
             <MenuCard menuCardImage={pepsi} menuCardTitle={"Pepsi"}/>
@@ -50,8 +50,8 @@ export default function TabsMenu() {
             <MenuCard menuCardImage={pepsi} menuCardTitle={"Pepsi"}/>
             <MenuCard menuCardImage={pepsi} menuCardTitle={"Pepsi"}/>
             <MenuCard menuCardImage={pepsi} menuCardTitle={"Pepsi"}/>
-          </TabPane>
-          <TabPane name="Выпечка" key="4">
+          </TabMenuPane>
+          <TabMenuPane name="Выпечка" key="4">
             <MenuCard menuCardImage={cinnamonBun} menuCardTitle={cinnamonBunTitle}/>
             <MenuCard menuCardImage={cinnamonBun} menuCardTitle={cinnamonBunTitle}/>
             <MenuCard menuCardImage={cinnamonBun} menuCardTitle={cinnamonBunTitle}/>
@@ -63,14 +63,14 @@ export default function TabsMenu() {
             <MenuCard menuCardImage={cinnamonBun} menuCardTitle={cinnamonBunTitle}/>
             <MenuCard menuCardImage={cinnamonBun} menuCardTitle={cinnamonBunTitle}/>
             <MenuCard menuCardImage={cinnamonBun} menuCardTitle={cinnamonBunTitle}/>
-          </TabPane>
-          <TabPane name="Десерты" key="5">
+          </TabMenuPane>
+          <TabMenuPane name="Десерты" key="5">
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
             <MenuCard menuCardImage={cheeseCake} menuCardTitle={"Чизкейк"}/>
-          </TabPane>
+          </TabMenuPane>
         </TabMenu>
       </div>
   );

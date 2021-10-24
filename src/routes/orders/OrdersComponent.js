@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Column } from 'simple-flexbox';
 import LoadingComponent from '../../components/loading/LoadingComponent';
+import Tabs from '../../components/tabs/Tabs';
+import TabsOrders from '../../components/tabsOrders/TabsOrders';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
 
@@ -28,9 +30,9 @@ function OrdersComponent() {
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
             ) : (
-              <h1 style={{fontSize: '20px', color: 'white', padding: '100px'}}>
-                Orders
-              </h1>
+              <>
+                <Tabs components={[<TabsOrders />, <TabsOrders />]} names={["В заведении", "На вынос"]} />
+              </>
             )}
         </Column>
     );

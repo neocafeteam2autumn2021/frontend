@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TabPaneProfile from "./TabPaneProfile";
+import TabPaneProfile from "./TabPane";
 
-const TabProfile = (props) => {
+const Tab = (props) => {
   const { children } = props;
   const [tabHeader, setTabHeader] = useState([]);
   const [childContent, setChildConent] = useState({});
@@ -36,10 +36,10 @@ const TabProfile = (props) => {
             </li>
             ))}
         </ul>
-        <div className="tabContentProfile">
+        <div className="tabContent">
             {Object.keys(childContent).map((key) => {
             if (key === active) {
-                return <div className="tabChildProfile" key={key}>{childContent[key]}</div>;
+                return <div className="tabChild" key={key}>{childContent[key]}</div>;
             } else {
                 return null;
             }
@@ -49,7 +49,7 @@ const TabProfile = (props) => {
   );
 };
 
-TabProfile.propTypes = {
+Tab.propTypes = {
   children: function (props, propName, componentName) {
     const prop = props[propName];
 
@@ -65,4 +65,4 @@ TabProfile.propTypes = {
   }
 };
 
-export default TabProfile;
+export default Tab;

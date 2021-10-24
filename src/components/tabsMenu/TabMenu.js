@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TabPane from "./TabPane";
+import TabMenuPane from "./TabMenuPane";
 
 const TabMenu = (props) => {
   const { children } = props;
@@ -55,9 +55,9 @@ TabMenu.propTypes = {
 
     let error = null;
     React.Children.forEach(prop, function (child) {
-      if (child.type !== TabPane) {
+      if (child.type !== TabMenuPane) {
         error = new Error(
-          "`" + componentName + "` children should be of type `TabPane`."
+          "`" + componentName + "` children should be of type `TabMenuPane`."
         );
       }
     });

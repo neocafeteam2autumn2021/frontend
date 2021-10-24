@@ -1,0 +1,124 @@
+.orderCard {
+    width: 279px;
+    margin: 12px;
+    position: relative;
+    border-radius: 24px;
+    background: #1E2432;
+    border: 1px solid #3D3E48;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    /* flex: 0 0 auto; this for horizontal scroll */
+}
+.orderCardHeader {
+    height: 77px;
+    padding: 12px 12px 9px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+.orderCardNumber {
+    font-size: 22px;
+}
+.orderCardForename {
+    font-size: 18px;
+    margin-top: 10px;
+}
+.newOrderCardHeader {
+    background-color: #EE6363;
+}
+.processOrderCardHeader {
+    background-color: #FFDC5D;
+}
+.readyOrderCardHeader {
+    background-color: #4CC179;
+}
+.cancelRrderCardHeader {
+    background-color: #464646;
+}
+.endOrderCardHeader {
+    background-color: #FF9900;
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 13px;
+    background: transparent;
+    cursor: pointer;
+}
+.close img {
+    transition: all 0.3s;
+}
+.close:hover img {
+    transform: scale(1.1);
+}
+.orderCardBody {
+    padding: 11px 12px;
+    border-bottom: 2px solid #3D3E48;
+}
+.orderCardTime {
+    text-align: right;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+.orderCardOrder {
+    color: #E9E9E9;
+    background: #343545;
+    border: 2px solid #3D3E48;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px;
+}
+.cardOrderHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+}
+.cardOrderOptions {
+    margin: 0 0 0 18px !important;
+    list-style-type: disc !important;
+}
+.cardOrderOptions  li {
+    margin: 5px 0;
+}
+.orderCardEtc {
+    font-weight: bold;
+    font-size: 18px;
+    color: #E9E9E9;
+    cursor: pointer;
+    margin: 5px 10px 5px;
+    width: fit-content;
+}
+.orderCardFooter {
+    height: 78px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.orderCardFooter button {
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 10px;
+    background: none;
+    cursor: pointer;
+    padding: 16px 27px;
+}
+.orderFooterButtonN {
+    color: #EE6363;
+    background: #343545 !important;
+    border: 2px solid #3D3E48;
+}
+.orderFooterButtonP {
+    color: #FFDC5D;
+    background: #343545 !important;
+    border: 2px solid #3D3E48;
+}
+.orderFooterButtonR {
+    color: #4CC179;
+}
+.orderFooterButtonC {
+    color: #808080;
+}
+.orderFooterButtonE {
+    color: #FFAC33;
+}
