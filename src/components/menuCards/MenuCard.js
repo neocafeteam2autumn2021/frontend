@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import menuCardInfo from '../../assets/images/menuCardInfo.png';
+import ModalBeverageCard from "../modal/ModalBeverageCard";
 import ModalInfo from "../modal/ModalInfo.js";
 import "./menuCard.css";
 
-export default function MenuCard({menuCardImage, menuCardTitle}) {
+export default function MenuCard({menuCardImage, menuCardTitle, type}) {
   
-  const [modal, setModal] = useState (false);
+  const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);
 
-  let price = 100;
+  const [showBevCard, setShowBevCard] = useState(false);
+
+  let prices = [65, 180, 350];
   return (
-      <div className="menuCard">
-        <ModalInfo show={modal} close={Toggle} />
+    <>
+      <ModalBeverageCard showBevCard={showBevCard} setShowBevCard={setShowBevCard} toggle={Toggle} menuCardTitle={menuCardTitle} menuCardImage={menuCardImage} prices={prices}/>
+      <ModalInfo show={modal} setModal={setModal} />
+      <div className="menuCard" onClick={() => type && setShowBevCard(true)}>
         <div className="menuCardTitle">{menuCardTitle}</div>
-        <div className="menuCardInfo" onClick={() => Toggle()}>
+        <div className="menuCardInfo" onClick={Toggle}>
           <img src={menuCardInfo} alt="menuCardInfo" />
         </div>
         <div className="menuCardImage">
           <img src={menuCardImage} alt="coffee" />
         </div>
         <div className="menuCardCircle"></div>
-        <div className="menuCardPrice">{price} с</div>
+        <div className="menuCardPrice">{prices[1]} с</div>
       </div>
+    </>
   );
 }

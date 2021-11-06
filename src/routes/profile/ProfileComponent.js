@@ -27,7 +27,7 @@ function ProfileComponent() {
 
     return (
         <Column
-          horizontal='center'>
+          horizontal='center' style={{width: '100%'}}>
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
             ) : (

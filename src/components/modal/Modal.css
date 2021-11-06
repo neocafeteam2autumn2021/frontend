@@ -30,6 +30,41 @@
   padding: 10px;
   border-radius: 0;
 }
+.beverageCardContainer .modal {
+  position: relative;
+  width: 464px;
+  height: 336px;
+  overflow: hidden;
+}
+.closeAccContainer .modal {
+  width: 535px;
+  background: #343545;
+}
+.closeAccContainer_content table {
+  width: 100%;
+  font-size: 16px;
+  text-align: left;
+  border-collapse: collapse;
+  margin-bottom: 50px;
+}
+.closeAccContainer_content td, th {
+  border-bottom: 1px solid #818291;
+  padding: 12px 0;
+  width: 80px;
+}
+.closeAccContainer_content tr th:first-child {
+  width: 140px;
+}
+.closeAccContainer_content td {
+  font-weight: normal;
+  font-size: 16px;
+  color: #4CC179;
+}
+.closeAccContainer_content td:first-child {
+  font-weight: bold;
+  font-size: 16px;
+  color: #E9E9E9;
+}
 .modalContainer .modal_header {
   position: relative;
   padding: 35px 0 30px 0;
@@ -41,6 +76,12 @@
 .modalContainer .modal_header-title {
   font-weight: 500;
   font-size: 24px;
+  color: #E9E9E9;
+}
+.closeAccContainer {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
   color: #E9E9E9;
 }
 .modalContainer .modal_notif-header {
@@ -61,7 +102,7 @@
 .modalContainer .modal_header .close:hover img {
   transform: scale(1.1);
 }
-.modalContainer .modal_content {
+.modal_content {
   padding: 0 0;
 }
 .modal-notif_content {
@@ -144,7 +185,7 @@ label {
   top: 8px;
   right: 0;
 }
-.modalContainer .modal_footer-block {
+.modal_footer-block {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
@@ -152,7 +193,7 @@ label {
   font-weight: bold;
   color: #C5C5C8;
 }
-.modalContainer .modal_footer button {
+.button {
   float: right;
   padding: 0.5rem;
   border-radius: 8px;
@@ -160,7 +201,7 @@ label {
 .modal_footer-btn {
   width: 150px;
 }
-.modalContainer .modal_footer .modal_footerAddBtn {
+.modal_footerAddBtn {
   font-size: 18px;
   height: 50px;
   width: 100%;
@@ -168,5 +209,109 @@ label {
   font-weight: bold;
   background-color: #4CC179;
   padding: 0px 30px;
+  border-radius: 10px;
   cursor: pointer;
+}
+.closeAccContainer .modal_footerAddBtn {
+  margin-top: 20px;
+}
+.modalAcceptText {
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  color: #E9E9E9;
+}
+.closeAccContainer_block {
+  text-align: left;
+}
+.closeAccContainer_item {
+  font-weight: 500;
+  font-size: 18px;
+  color: #E9E9E9;
+  margin: 10px 0;
+}
+.closeAccContainer_item span {
+  color: #4CC179;
+  margin: 0 10px;
+}
+.beverageCardCircle {
+  width: 187px;
+  height: 187px;
+  background: #2D2D3C;
+  border-radius: 50%;
+  position: absolute;
+  top: -48px;
+  left: -20px;
+  z-index: 1;
+}
+.beverageCardImage {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+.beverageCardImage img {
+  height: 108px;
+}
+.beverageCardTitle {
+  position: absolute;
+  top: 114px;
+  left: 32px;
+  width: 154px;
+  font-weight: normal;
+  font-size: 48px;
+  color: #E9E9E9;
+  z-index: 3;
+}
+.beverageCardPrices {
+  position: absolute;
+  bottom: 30px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+.beverageCardPrice {
+  width: 120px;
+  height: 128px;
+  background: #343545;
+  border: 1px solid #3B3D4D;
+  border-radius: 13px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.beverageCardPriceCircle {
+  position: absolute;
+  left: -20px;
+  top: -13px;
+  width: 74px;
+  height: 74px;
+  border-radius: 50px;
+  background: #3D3F51;
+  z-index: 1;
+}
+.beverageCardPriceSize {
+  position: absolute;
+  left: 13px;
+  font-weight: normal;
+  font-size: 40px;
+  color: #968D8D;
+  z-index: 2;
+}
+.beverageCardPriceVolume {
+  position: absolute;
+  right: 10px;
+  top: 23px;
+  font-weight: normal;
+  font-size: 16px;
+  color: #C4C4C4;
+}
+.beverageCardPriceSelf {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-weight: normal;
+  font-size: 34px;
+  color: #D9D9D9;
 }

@@ -1,50 +1,73 @@
-.menuCard {
-    width: 220px;
-    height: 156px;
-    margin: 12px;
-    position: relative;
-    border-radius: 24px;
-    background: #1E2432;
-    border: 1px solid #3D3E48;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+.quickOrderContainer {
+    background: none;
+    background-color: #1E2432;
+    height: 100%;
+    width: 329px;
+    padding: 10px;
+    border-radius: 0;
 }
-.menuCardTitle {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    width: 154px;
+.quickOrderContainer .quickOrder_header {
+    position: relative;
+    padding: 8px 0 30px 0;
+}
+.quickOrderContainer .quickOrder_title {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 24px;
     color: #E9E9E9;
 }
-.menuCardInfo {
+.quickOrderContainer .quickOrder_header .close {
     position: absolute;
-    top: 14px;
-    right: 14px;
+    top: 0;
+    right: 0;
+    background: transparent;
     cursor: pointer;
 }
-.menuCardCircle {
-    width: 130px;
-    height: 130px;
-    background: #2D2D3C;
-    border-radius: 50%;
-    position: absolute;
-    bottom: -48px;
-    left: -20px;
-    z-index: 1;
+.quickOrderContainer .quickOrder_header .close img {
+    transition: all 0.3s;
 }
-.menuCardImage {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    z-index: 2;
+.quickOrderContainer .quickOrder_header .close:hover img {
+    transform: scale(1.1);
 }
-.menuCardPrice {
-    position: absolute;
-    bottom: 14px;
-    right: 14px;
+.quickOrderContent {
+    padding: 0 0;
+    height: 380px;
+    overflow-y: scroll;
+}
+.quickOrderContent::-webkit-scrollbar {
+    display: none;
+}
+.quickOrderContent {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.quickOrderContent_title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #E9E9E9;
+}
+.quickOrder_total {
+    display: flex;
+    justify-content: space-between;
     font-weight: bold;
     font-size: 24px;
-    color: #968D8D;
+    color: #E9E9E9;
+}
+.quickOrderBtn {
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    padding: 16px 0;
+    margin: 12px 0;
+    cursor: pointer;
+}
+.quickOrderContentAddBtn {
+    background: #FF9C68;
+    border-radius: 8px;
+    color: #E9E9E9;
+}
+.quickOrderContentEndBtn {
+    background: #4CC179;
+    border-radius: 10px;
+    color: #FFFFFF;
+    margin-bottom: 0;
 }

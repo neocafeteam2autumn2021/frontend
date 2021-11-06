@@ -11,14 +11,13 @@ import NotificationComponent from './NotificationComponent';
 
 function SidebarComponent() {
     const { push } = useHistory();
-    const isMobile = window.innerWidth <= 1080;
 
     function onClick(slug, parameters = {}) {
         push(convertSlugToUrl(slug, parameters));
     }
 
     return (
-        <Menu isMobile={isMobile}>
+        <Menu>
             <NotificationComponent />
             <MenuItem
                 id={SLUGS.menu}

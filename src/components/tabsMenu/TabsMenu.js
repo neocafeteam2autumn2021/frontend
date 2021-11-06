@@ -15,21 +15,21 @@ export default function TabsMenu() {
       <div className="tabsContainerMenu">
         <TabMenu>
           <TabMenuPane name="Кофе" key="1">
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
-            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"}/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
+            <MenuCard menuCardImage={expresso} menuCardTitle={"Экспрессо"} type="beverage"/>
           </TabMenuPane>
           <TabMenuPane name="Чай" key="2">
             <MenuCard menuCardImage={whiteTea} menuCardTitle={"Белый чай"}/>

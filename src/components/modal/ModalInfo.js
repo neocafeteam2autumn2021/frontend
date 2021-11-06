@@ -3,12 +3,12 @@ import cancelModal from '../../assets/images/cancelModal.png';
 import сroissant from '../../assets/images/сroissant.png';
 import "./modal.css";
 
-const ModalInfo = ({ show, close }) => {
+const ModalInfo = ({ show, setModal }) => {
     
     return (
       <>
        {
-       show ?
+       show &&
         <div
           className="modalContainer"
         >
@@ -17,7 +17,7 @@ const ModalInfo = ({ show, close }) => {
                 <div className="modal_info-img">
                     <img src={сroissant} alt="modal_info-img" />
                 </div>
-                <button className="close" onClick={() => close()}>
+                <button className="close" onClick={() => setModal(false)}>
                     <img src={cancelModal} alt="cancelModal" />
                 </button>
             </header>
@@ -39,7 +39,6 @@ const ModalInfo = ({ show, close }) => {
             </footer>
           </div>
         </div>
-        : null
        }
       </>
     );

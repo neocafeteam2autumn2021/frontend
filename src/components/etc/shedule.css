@@ -44,8 +44,6 @@
     background: transparent !important;
     border: none !important;
 }
-.days li .active {
-  padding: 5px;
-  background: #1abc9c;
+.activeDay {
   color: white !important
 }

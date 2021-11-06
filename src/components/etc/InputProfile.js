@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { createUseStyles, useTheme } from 'react-jss';
+import { useDispatch } from "react-redux";
 import { Column } from "simple-flexbox";
+import { signout } from "../../redux/actions/userActions";
+import { useHistory } from 'react-router-dom';
+import SLUGS from '../../resources/slugs';
 
 const useStyles = createUseStyles((theme) => ({
     block: {
@@ -50,6 +54,9 @@ export default function InputProfile() {
 
     const theme = useTheme();
     const classes = useStyles({ theme });
+    const history = useHistory();
+
+    const dispatch = useDispatch();
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -68,6 +75,11 @@ export default function InputProfile() {
     const saveProfileIfo = () => {
         alert("saved")
         }
+    
+    const onClickLogOut = () => {
+        dispatch(signout());
+        history.push(SLUGS.login)
+    }
     
     const onChangeDate = (e) => {
         setChanged(true);
@@ -133,6 +145,11 @@ export default function InputProfile() {
                 className={changed && name.length > 0 && surname.length > 0 && date.length > 0 && mynumber.length > 0 ? `${classes.activeSaveButton} ${classes.button}` : classes.button}
                 onClick={saveProfileIfo}
                 >Сохранить</button>
+            
+            <button
+                    className={`${classes.activeSaveButton} ${classes.button}`}
+                    onClick={onClickLogOut}
+                    >Log out</button>
         </ Column>
     );
 };

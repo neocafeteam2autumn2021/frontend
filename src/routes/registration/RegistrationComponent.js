@@ -68,7 +68,6 @@ function RegistrationComponent() {
     const dispatch = useDispatch();
 
     // const userLogIn = useSelector((state) => state.userSignin);
-    // const { loading } = userLogIn;
     // const { loading, error } = userLogIn;
 
     const [name, setName] = useState('');

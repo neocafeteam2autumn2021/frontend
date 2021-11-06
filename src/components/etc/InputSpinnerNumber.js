@@ -3,7 +3,7 @@ import { createUseStyles, useTheme } from 'react-jss';
 import minusModal from "../../assets/images/minusModal.png";
 import plusModal from "../../assets/images/plusModal.png";
 
-const useStyles = createUseStyles((theme) => ({
+const useStyles = createUseStyles((theme, background) => ({
     inputSpinnerBlock: {
         width: 137,
         height: 50,
@@ -11,7 +11,7 @@ const useStyles = createUseStyles((theme) => ({
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: [7.5, 8],
-        backgroundColor: theme.color.mako,
+        backgroundColor: background !== "no" ? "transparent" : theme.color.mako,
         borderRadius: '8px',
     },
     inputSpinner: {
@@ -24,13 +24,13 @@ const useStyles = createUseStyles((theme) => ({
     }
 }));
 
-function InputSpinnerNumber({pieces, setPieces}) {
+function InputSpinnerNumber({pieces, setPieces, background}) {
 
     const theme = useTheme();
-    const classes = useStyles({ theme });
+    const classes = useStyles({ theme, background });
 
     function onClickMinus() {
-        if(pieces > 0) {
+        if(pieces > 1) {
             setPieces(pieces-1);
         }
     }

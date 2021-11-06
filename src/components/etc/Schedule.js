@@ -48,6 +48,7 @@ export default function Schedule() {
     const classes = useStyles({ theme });
 
     const [monthDays, setMonthDays] = useState([]);
+    const [day, setDay] = useState(1);
 
     useEffect(() => {
         var today = new Date();
@@ -71,6 +72,7 @@ export default function Schedule() {
             a[i] = 0
             days.unshift(a)
         }
+        setDay(today.getDate());
         setMonthDays(days);
       }, []);
 
@@ -106,7 +108,8 @@ export default function Schedule() {
                         let key = Object.keys(days)[0];
                         let value = days[key];
                         if(value !== 0) {
-                            if(key === "Пн" || key === "Сб" || key === "Вс") return <li className="workDays" key={value}>{value}</li>
+                            if(value === day) return <li className="activeDay" key={value}>{value}</li>
+                            else if(key === "Пн" || key === "Сб" || key === "Вс") return <li className="workDays" key={value}>{value}</li>
                             else if(key === "Ср") return <li className="workNights" key={value}>{value}</li>
                             else return <li className="freeDays" key={value}>{value}</li>
                         }

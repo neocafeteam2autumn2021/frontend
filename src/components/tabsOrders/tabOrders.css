@@ -7,10 +7,6 @@
   flex-direction: column;
   align-items: center;
 }
-.tabHeaderMenu {
-  height: fit-content;
-  margin: 40px 0;
-}
 .tabHeaderOrders {
   display: flex;
   margin: 0 !important;
@@ -67,6 +63,7 @@
 .tabChildOrders {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   height: 465px;
   overflow-y: scroll;
 

@@ -13,8 +13,6 @@ export default function TabsOrders() {
             <OrderCard orderCardTitle={"Экспрессо"} type="p"/>
             <OrderCard orderCardTitle={"Экспрессо"} type="r"/>
             <OrderCard orderCardTitle={"Экспрессо"} type="c"/>
-            <OrderCard orderCardTitle={"Экспрессо"} type="e"/>
-            <OrderCard orderCardTitle={"Экспрессо"} type="c"/>
           </TabPaneOrders>
           <TabPaneOrders name="Новый" key="2" type="new">
             <OrderCard orderCardTitle={"Экспрессо"} type="n"/>
