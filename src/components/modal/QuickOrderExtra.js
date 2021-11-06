@@ -5,9 +5,9 @@ import './modal.css';
 
 export default function QuickOrderExtra({ show, close }) {
   const [state, setState] = useState({
-      gender: true,
-      love: false,
-      other: false
+        "Шоколадный сироп": true,
+        "Карамельный сироп": false,
+        "Ванильный сироп": false
   });
   const [pieces, setPieces] = useState(1);
   const handleToggle = ({ target }) =>

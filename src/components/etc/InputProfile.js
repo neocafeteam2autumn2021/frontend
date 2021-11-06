@@ -149,7 +149,7 @@ export default function InputProfile() {
             <button
                     className={`${classes.activeSaveButton} ${classes.button}`}
                     onClick={onClickLogOut}
-                    >Log out</button>
+                    >Выйти</button>
         </ Column>
     );
 };
