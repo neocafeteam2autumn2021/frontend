@@ -12,10 +12,10 @@ const getMenuStyles = ({ theme }) => ({
         zIndex: 19
     },
     bmBurgerBars: {
-        background: theme.color.veryDarkGrayishBlue
+        background: 'white'
     },
     bmBurgerBarsHover: {
-        background: theme.color.darkRed
+        background: 'red'
     },
     bmCrossButton: {
         display: 'none'
@@ -26,17 +26,17 @@ const getMenuStyles = ({ theme }) => ({
     bmMenuWrap: {
         position: 'fixed',
         height: '100%',
-        width: 255,
-        zIndex: 30
+        width: 80,
+        zIndex: 30,
+        transition: 'unset'
     },
     bmMenu: {
-        background: theme.color.darkGrayishBlue
+        background: theme.color.blueCharcoal,
     },
-    bmItem: {
-        outline: 'none',
-        '&:focus': {
-            outline: 'none'
-        }
+    bmItemList: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     bmMorphShape: {
         fill: theme.color.veryDarkGrayishBlue

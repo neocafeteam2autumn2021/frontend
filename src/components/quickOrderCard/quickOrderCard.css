@@ -1,0 +1,41 @@
+.quickOrderCard {
+    width: 301px;
+    min-height: 127px;
+    margin-top: 20px;
+    color: #E9E9E9;
+    border-radius: 10px;
+    background: #343545;
+    border: 2px solid #3D3E48;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.13);
+    padding: 12px 7px 16px;
+}
+.quickOrderCardContent {
+    display: flex;
+    justify-content: space-between;
+}
+.quickOrderCardLeftBlock {
+    width: 82px;
+}
+.quickOrderCardRightBlock {
+    width: 200px;
+}
+.quickOrderCardHeader {
+    display: flex;
+    justify-content: space-between;
+}
+.quickOrderCardTitle {
+    font-weight: 500;
+    font-size: 18px;
+}
+.quickOrderCardOption {
+    cursor: pointer;
+}
+.quickOrderCardPrice {
+    font-weight: 500;
+    font-size: 16px;
+}
+.quickOrderCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

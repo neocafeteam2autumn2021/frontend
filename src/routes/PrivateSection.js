@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createUseStyles, useTheme } from 'react-jss';
-import { Column, Row } from 'simple-flexbox';
+import QuickOrder from '../components/quickOrder/QuickOrder';
 import { SidebarComponent, SidebarContext } from '../components/sidebar';
-import HeaderComponent from '../components/header/HeaderComponent';
 import PrivateRoutes from './PrivateRoutes';
 
 const useStyles = createUseStyles({
     container: {
         height: '100%',
-        minHeight: 850,
     },
     mainBlock: {
-        marginLeft: 255,
-        backgroundColor: ({ theme }) => theme.color.lightGrayishBlack,
-        '@media (max-width: 1080px)': {
-            marginLeft: 0
-        }
+        marginLeft: 80,
+        backgroundColor: ({ theme }) => theme.color.blueCharcoal,
+        display: 'flex',
+        justifyContent: 'space-around',
     },
     contentBlock: {
-        padding: 30,
+        padding: 0,
+    },
+    contentBlockQuickOrder: {
+        width: '920px',
+        padding: 0,
+        '& .tabHeaderMenu': {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+            margin: ['30px', 0],
+        },
+        '& .tabHeaderMenu li': {
+            margin: [0, '10px'],
+        },
+        '& .tabHeaderOrders': {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-around',
+        },
+        '& .tabHeaderOrders li': {
+            margin: ['10px', '5px'],
+        },
+        '& .tabChildMenu': {
+            justifyContent: 'space-around',
+        },
     }
 });
 
@@ -26,17 +47,19 @@ function PrivateSection() {
     const theme = useTheme();
     const classes = useStyles({ theme });
 
+    const [showQuickOrder, setShowQuickOrder] = useState(true);
+
     return (
         <SidebarContext>
-            <Row className={classes.container}>
+            <div className={classes.container}>
                 <SidebarComponent />
-                <Column flexGrow={1} className={classes.mainBlock}>
-                    <HeaderComponent />
-                    <div className={classes.contentBlock}>
+                <div className={classes.mainBlock}>
+                    <QuickOrder showQuickOrder={showQuickOrder} setShowQuickOrder={setShowQuickOrder} />
+                    <div className={showQuickOrder ? classes.contentBlockQuickOrder : classes.contentBlock}>
                         <PrivateRoutes />
                     </div>
-                </Column>
-            </Row>
+                </div>
+            </div>
         </SidebarContext>
     );
 }

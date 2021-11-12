@@ -1,0 +1,49 @@
+.sheduleCalendar {
+    width: 377px;
+}
+.weekdays {
+    margin-bottom: 0;
+}
+.weekdays li {
+    display: inline-block;
+    width: 30px;
+    margin: 0 11px;
+    font-weight: normal;
+    font-size: 20px;
+    color: #DEDEDF;
+    text-align: center;
+}
+
+.days {
+    padding: 10px 0;
+    margin: 0;
+}
+.days li {
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: normal;
+    font-size: 16px;
+    margin: 18px 11px 0;
+    background: #343545;
+    border: 1px solid #3D3E48;
+    border-radius: 5px;
+}
+.workDays {
+    color: #FF9C68;
+}
+.workNights {
+    color: #A489FE;
+}
+.freeDays {
+    color: #4CC179;
+}
+.noDays {
+    background: transparent !important;
+    border: none !important;
+}
+.activeDay {
+  color: white !important
+}

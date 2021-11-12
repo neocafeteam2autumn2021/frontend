@@ -4,16 +4,20 @@ import { createActivityReducer, deleteActivityReducer, getActivityReducer, getAl
 import { createCategoryFoodReducer, deleteCategoryFoodReducer, getAllCategoriesReducer, getCategoryFoodReducer, updateCategoryFoodReducer } from './redux/reducers/categoryReducers';
 import { createFoodReducer, deleteFoodReducer, getAllFoodsReducer, getFoodReducer, updateFoodReducer } from './redux/reducers/foodReducers';
 import { getStatisticsReducer } from './redux/reducers/statisticsReducers';
-import { getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userSigninReducer } from './redux/reducers/userReducers';
+import { getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userSigninReducer, userTokenReducer } from './redux/reducers/userReducers';
 
 const initialState = {
-  userSignin: {
+  userToken: {
     userInfo: localStorage.getItem('userInfo')
       ? JSON.parse(localStorage.getItem('userInfo'))
+      : null,
+    userInfoFull: localStorage.getItem('userInfoFull')
+      ? JSON.parse(localStorage.getItem('userInfoFull'))
       : null,
   }
 };
 const reducer = combineReducers({
+  userToken: userTokenReducer,
   userSignin: userSigninReducer,
   allStatistics: getStatisticsReducer,
   allUsers: getAllUsersReducer,

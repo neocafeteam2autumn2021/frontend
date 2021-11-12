@@ -10,14 +10,14 @@ function Routes() {
     // eslint-disable-next-line no-unused-vars
     const [width, height] = useWindowSize();
 
-    const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo } = userSignin;
+    const userSignin = useSelector((state) => state.userToken);
+    const { userInfoFull } = userSignin;
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    return !userInfo ? <PublicRoutes /> : <PrivateSection />;
+    return !userInfoFull ? <PublicRoutes /> : <PrivateSection />;
 }
 
 export default Routes;

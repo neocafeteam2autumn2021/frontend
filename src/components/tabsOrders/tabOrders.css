@@ -1,0 +1,81 @@
+.tabsContainerOrders {
+  width: 100%;
+}
+
+.tabsOrders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tabHeaderOrders {
+  display: flex;
+  margin: 0 !important;
+}
+.tabHeaderOrders li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  font-size: 20px;
+  margin: 20px 15px;
+  font-weight: 500;
+  padding: 10.5px 19.5px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.tabHeaderOrders li div {
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50px;
+}
+.tabHeaderOrdersAll {
+  background: #7A68B7;
+}
+.tabHeaderOrdersNew {
+  background: #FF0000;
+}
+.tabHeaderOrdersProcess {
+  background: #FFF500;
+}
+.tabHeaderOrdersReady {
+  background: #09ED20;
+}
+.tabHeaderOrdersCancel {
+  background: #262626;
+}
+.tabHeaderOrdersEnd {
+  background: #FF9900;
+}
+  
+.tabHeaderOrders li.active,
+.tabHeaderOrders li:hover {
+  background: rgba(255, 255, 255, 0.27);
+}
+.tabHeaderOrders li.active div,
+.tabHeaderOrders li:hover div {
+  background: #FFFFFF;
+}
+.tabContentOrders {
+  width: 100%;
+}
+  
+.tabChildOrders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 465px;
+  overflow-y: scroll;
+
+  /* width: 1100px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto; this for horizontal scroll */
+}
+.tabChildOrders::-webkit-scrollbar {
+  display: none;
+}
+.tabChildOrders {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
