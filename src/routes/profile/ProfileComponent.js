@@ -1,25 +1,60 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createUseStyles, useTheme } from 'react-jss';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Column } from 'simple-flexbox';
 import InputProfile from '../../components/etc/InputProfile';
 import Schedule from '../../components/etc/Schedule';
 import LoadingComponent from '../../components/loading/LoadingComponent';
+import ModalLogOut from '../../components/modal/ModalLogOut';
 import Tabs from '../../components/tabs/Tabs';
+import { signout } from '../../redux/actions/userActions';
+import SLUGS from '../../resources/slugs';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
 
+const useStyles = createUseStyles((theme) => ({
+  logOutButton: {
+    ...theme.typography.button,
+    width: '120px',
+    height: '64px',
+    borderRadius: 30,
+    padding: [19.5, 0],
+    border: 'none',
+    cursor: 'pointer',
+    display: 'block',
+    backgroundColor: theme.color.emerald,
+    color: 'white',
+    position: "fixed",
+    top: 26,
+    right: 32
+  }
+}));
+
 function ProfileComponent() {
+
+  const theme = useTheme();
+  const classes = useStyles({ theme });
+  const history = useHistory();
 
   const allStatistics = useSelector((state) => state.allStatistics);
   const { errorStatistics, loadingStatistics } = allStatistics;
 
   const dispatch = useDispatch();
 
+  const [showLogout, setShowLogout] = useState(false);
+
   useEffect(() => {
     // if(errorStatistics && errorStatistics.indexOf("403") !== -1) {
     //   dispatch(signout());
     // }
   }, [dispatch, errorStatistics]);
+
+  const onClickLogOut = () => {
+    dispatch(signout());
+    setShowLogout(false);
+    history.push(SLUGS.login);
+  }
 
   useEffect(() => {
     // dispatch(getStatistics());
@@ -30,9 +65,14 @@ function ProfileComponent() {
           horizontal='center' style={{width: '100%'}}>
             {loadingStatistics ? (
               <LoadingComponent loading={loadingStatistics} />
-            ) : (
+            ) : <>
               <Tabs components={[<InputProfile />, <Schedule />]} names={["Личные данные", "График работы"]} />
-            )}
+              <ModalLogOut onClickLogOut={onClickLogOut} showLogout={showLogout} setShowLogout={setShowLogout} />
+              <button
+                className={classes.logOutButton}
+                onClick={() => setShowLogout(true)}
+                >Выйти</button>
+            </>}
         </Column>
     );
 }

@@ -14,7 +14,7 @@ const ModalAccept = ({ showAccept, onClickAccepted, setAccepted }) => {
        {
        showAccept ?
         <div
-          className="modalContainer"
+          className="modalContainer modalAcceptContainer"
         >
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <header className="modal_header">

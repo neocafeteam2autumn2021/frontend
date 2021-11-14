@@ -40,6 +40,12 @@
   width: 535px;
   background: #343545;
 }
+.modalAcceptContainer .modal {
+  background: #343545;
+}
+.modalLogOutContainer .modal {
+  background: #343545;
+}
 .closeAccContainer_content table {
   width: 100%;
   font-size: 16px;
@@ -128,6 +134,9 @@
   font-size: 18px;
   padding: 8px;
   cursor: pointer;
+}
+.modalLogOutContainer .modalAcceptText {
+  margin: 25.25px 0;
 }
 
 label {
@@ -314,4 +323,14 @@ label {
   font-weight: normal;
   font-size: 34px;
   color: #D9D9D9;
+}
+.modal_footer-logOut {
+  display: flex;
+  justify-content: space-around;
+}
+.modal_footer-logOut button {
+  width: 100px;
+}
+.modal_footer-logOut button:first-child {
+  background-color: transparent;
 }
