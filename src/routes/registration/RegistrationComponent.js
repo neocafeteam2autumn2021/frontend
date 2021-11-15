@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Column } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { signin } from '../../redux/actions/userActions';
-// import LoadingComponent from '../../components/loading/LoadingComponent';
 import auth_back from "../../assets/images/auth_back.png";
+import LoadingComponent from '../../components/loading/LoadingComponent';
 import { USER_TOKEN_SUCCESS } from '../../redux/constants/userConstants';
+import { register } from '../../redux/actions/userActions';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -67,19 +68,30 @@ function RegistrationComponent() {
     const classes = useStyles({ theme });
     const dispatch = useDispatch();
 
-    // const userLogIn = useSelector((state) => state.userSignin);
-    // const { loading, error } = userLogIn;
+    const userRegister = useSelector((state) => state.userRegister);
+    const { loadingRegister, dataRegister, errorRegister } = userRegister;
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [date, setDate] = useState('');
+    const [registerData, setRegisterData] = useState({});
+
+    useEffect(() => {
+        if(dataRegister) {
+            localStorage.setItem('userInfoFull', JSON.stringify(registerData));
+            dispatch({ type: USER_TOKEN_SUCCESS, payload: registerData });
+        }
+        if(errorRegister) {
+            alert(errorRegister);
+        }
+    }, [dataRegister, dispatch, registerData, errorRegister])
 
     const signin = (event) => {
         event.preventDefault();
         let b = {...{name, surname, date}, ...JSON.parse(localStorage.getItem('userInfo'))};
-        localStorage.setItem('userInfoFull', JSON.stringify(b));
-        dispatch({ type: USER_TOKEN_SUCCESS, payload: b });
-        }
+        setRegisterData(b);
+        dispatch(register(date.split(".").reverse().join("-"), b.latestToken, b.mynumber, name, surname));
+    }
     
     const onChangeDate = (e) => {
         let val = e.target.value
@@ -95,11 +107,11 @@ function RegistrationComponent() {
         <Column className={classes.container}
             vertical='center'
             horizontal='center'>
+            { loadingRegister ? <LoadingComponent loading /> : null}
             <Column className={classes.block} horizontal='center'>
                 <div className={classes.blockTitle}>
                     Регистрация
-                </div>
-                    
+                </div> 
                 <form onSubmit={signin}>
                     <div className={classes.kicker}>Имя</div>
                         <input

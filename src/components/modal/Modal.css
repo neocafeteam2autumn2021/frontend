@@ -46,6 +46,9 @@
 .modalLogOutContainer .modal {
   background: #343545;
 }
+.modalQuickOrderContainer .modal {
+  background: #343545;
+}
 .closeAccContainer_content table {
   width: 100%;
   font-size: 16px;
@@ -63,12 +66,12 @@
 }
 .closeAccContainer_content td {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 18px;
   color: #4CC179;
 }
 .closeAccContainer_content td:first-child {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   color: #E9E9E9;
 }
 .modalContainer .modal_header {

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Column } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
-// import { useDispatch } from 'react-redux';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { signin } from '../../redux/actions/userActions';
 // import LoadingComponent from '../../components/loading/LoadingComponent';
 import { auth } from "../../firebase";
@@ -11,6 +10,9 @@ import auth_back from "../../assets/images/auth_back.png";
 import OtpInput from 'react-otp-input';
 import { useHistory } from 'react-router';
 import SLUGS from '../../resources/slugs';
+import LoadingComponent from '../../components/loading/LoadingComponent';
+import { checkUser } from '../../redux/actions/userActions';
+import { USER_INFO_SUCCESS } from '../../redux/constants/userConstants';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -133,10 +135,10 @@ function LoginComponent() {
     const theme = useTheme();
     const classes = useStyles({ theme });
     const history = useHistory();
+    const dispatch = useDispatch();
 
-    // const userLogIn = useSelector((state) => state.userSignin);
-    // const { loading } = userLogIn;
-    // const { loading, error } = userLogIn;
+    const checkUserReq = useSelector((state) => state.checkUser);
+    const { loadingCheckUser, dataCheckUser } = checkUserReq;
 
     const [mynumber, setnumber] = useState('');
     const [otp, setotp] = useState({otp: ''});
@@ -162,6 +164,7 @@ function LoginComponent() {
         
         if (mynumber === "" || mynumber.length < 10) return;
 
+        dispatch(checkUser(mynumber));
         let verify = new firebase.auth.RecaptchaVerifier('recaptcha-container', {size: "invisible"});
         auth.signInWithPhoneNumber(mynumber, verify).then((result) => {
             setfinal(result);
@@ -182,7 +185,7 @@ function LoginComponent() {
     const onChangePhone = (e) => {
         let val = e.target.value;
         let newVal = ""
-        if(val.length === 1 && mynumber.length < val.length) newVal = "+996 ("
+        if(val.length === 1 && mynumber.length < val.length) newVal = "+996 (" + val
         else if(val.length === 9 && mynumber.length < val.length) newVal = val + ") "
         else if(val.length === 13 && mynumber.length < val.length) newVal = val + " "
         else if(val.length === 16 && mynumber.length < val.length) newVal = val + " "
@@ -198,9 +201,10 @@ function LoginComponent() {
         final.confirm(otp.otp).then((result) => {
             result.user.getIdToken(true)
             .then(latestToken => {
-                const userInfo = { latestToken, mynumber};
+                const userInfo = { latestToken, mynumber, dataCheckUser};
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                history.push(SLUGS.registration);
+                dispatch({ type: USER_INFO_SUCCESS, payload: userInfo });
+                dataCheckUser ? history.push(SLUGS.registration) : history.push(SLUGS.menu);
             });
         }).catch((err) => {
             alert(err)
@@ -211,50 +215,51 @@ function LoginComponent() {
         <Column className={classes.container}
             vertical='center'
             horizontal='center'>
+            { loadingCheckUser ? <LoadingComponent loading /> : null}
             {show ? <button onClick={onClickBack} className={classes.backButton}>Назад</button> : null}
-            <Column className={otpWrong ? `${classes.block} ${classes.blockError}` : `${classes.block}`} horizontal='center'>
-                <div className={classes.innerBlock} style={{ display: !show ? "flex" : "none" }}>
-                    <div className={classes.blockTitle}>
-                        Вход
+                <Column className={otpWrong ? `${classes.block} ${classes.blockError}` : `${classes.block}`} horizontal='center'>
+                    <div className={classes.innerBlock} style={{ display: !show ? "flex" : "none" }}>
+                        <div className={classes.blockTitle}>
+                            Вход
+                        </div>
+                        <div className={classes.kicker} >Номер телефона</div>
+                        <input
+                            value={mynumber}
+                            className={classes.telInput}
+                            type="tel" placeholder="+996 (000) 00 00 00"
+                            onChange={onChangePhone}
+                            required />
+                    <div id="recaptcha-container"></div>
+                    <button
+                        className={mynumber.length > 0 ? `${classes.activeButton} ${classes.button}` : `${classes.nextButton} ${classes.button}`}
+                        onClick={signin}>Далее</button>
                     </div>
-                    <div className={classes.kicker} >Номер телефона</div>
-                    <input
-                        value={mynumber}
-                        className={classes.telInput}
-                        type="tel" placeholder="+996 (000) 00 00 00"
-                        onChange={onChangePhone}
-                        required />
-                  <div id="recaptcha-container"></div>
-                  <button
-                    className={mynumber.length > 0 ? `${classes.activeButton} ${classes.button}` : `${classes.nextButton} ${classes.button}`}
-                    onClick={signin}>Далее</button>
-                </div>
-                <div className={classes.innerBlock} style={{ display: show ? "flex" : "none" }}>
-                    <div className={classes.blockTitle}>
-                        СМС код
+                    <div className={classes.innerBlock} style={{ display: show ? "flex" : "none" }}>
+                        <div className={classes.blockTitle}>
+                            СМС код
+                        </div>
+                        <div className={classes.subTitle} >Код был отправлен на номер {mynumber.replaceAll(' ', '')}</div>
+                        <div className={otpWrong ? `${classes.otpKicker} ${classes.otpKickerError}` : `${classes.otpKicker}`} >
+                            {otpWrong ? 'Неверный код*' : 'Введите код'}</div>
+                        <OtpInput
+                            value={otp.otp}
+                            onChange={(otp) => {
+                                setotp({ otp })
+                                setOtpWrong(false)
+                            }}
+                            numInputs={6}
+                            />
+                        {otp && otp.otp.length === 6 && !otpWrong ?
+                            <button className={ `${classes.activeButton} ${classes.button}`}
+                            onClick={ValidateOtp}>Подтвердить</button> :
+                            <button className={ `${classes.confirmButton} ${classes.button}`}>Подтвердить</button>}
+                        {timeLeft === 0 ?
+                            <button className={`${classes.activeResendButton} ${classes.button}`}
+                            onClick={signin}>Отправить повторно</button> :
+                            <button className={`${classes.resendButton} ${classes.button}`}>Отправить повторно ({timeLeft} сек)</button>
+                        }
                     </div>
-                    <div className={classes.subTitle} >Код был отправлен на номер {mynumber.replaceAll(' ', '')}</div>
-                    <div className={otpWrong ? `${classes.otpKicker} ${classes.otpKickerError}` : `${classes.otpKicker}`} >
-                        {otpWrong ? 'Неверный код*' : 'Введите код'}</div>
-                    <OtpInput
-                        value={otp.otp}
-                        onChange={(otp) => {
-                            setotp({ otp })
-                            setOtpWrong(false)
-                        }}
-                        numInputs={6}
-                         />
-                    {otp && otp.otp.length === 6 && !otpWrong ?
-                        <button className={ `${classes.activeButton} ${classes.button}`}
-                        onClick={ValidateOtp}>Подтвердить</button> :
-                        <button className={ `${classes.confirmButton} ${classes.button}`}>Подтвердить</button>}
-                    {timeLeft === 0 ?
-                        <button className={`${classes.activeResendButton} ${classes.button}`}
-                        onClick={signin}>Отправить повторно</button> :
-                        <button className={`${classes.resendButton} ${classes.button}`}>Отправить повторно ({timeLeft} сек)</button>
-                    }
-                </div>
-            </Column>
+                </Column>
         </Column>
     );
 }

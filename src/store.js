@@ -4,7 +4,7 @@ import { createActivityReducer, deleteActivityReducer, getActivityReducer, getAl
 import { createCategoryFoodReducer, deleteCategoryFoodReducer, getAllCategoriesReducer, getCategoryFoodReducer, updateCategoryFoodReducer } from './redux/reducers/categoryReducers';
 import { createFoodReducer, deleteFoodReducer, getAllFoodsReducer, getFoodReducer, updateFoodReducer } from './redux/reducers/foodReducers';
 import { getStatisticsReducer } from './redux/reducers/statisticsReducers';
-import { getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userSigninReducer, userTokenReducer } from './redux/reducers/userReducers';
+import { checkUserReducer, getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userRegisterReducer, userSigninReducer, userTokenReducer } from './redux/reducers/userReducers';
 
 const initialState = {
   userToken: {
@@ -18,7 +18,9 @@ const initialState = {
 };
 const reducer = combineReducers({
   userToken: userTokenReducer,
+  userRegister: userRegisterReducer,
   userSignin: userSigninReducer,
+  checkUser: checkUserReducer,
   allStatistics: getStatisticsReducer,
   allUsers: getAllUsersReducer,
   allFoods: getAllFoodsReducer,

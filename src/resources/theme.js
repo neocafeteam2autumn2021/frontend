@@ -15,6 +15,9 @@ const color = {
     iron: '#DEDEDF',
     atomicTangerine: '#FF9C68',
     heliotrope: '#A489FE',
+    veryDarkGrayishBlue: '#373a47',
+    lightGrayishBlue: '#F7F8FC',
+    brightBlue: '#3498db',
 };
 
 const typography = {

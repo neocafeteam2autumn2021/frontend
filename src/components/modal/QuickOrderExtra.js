@@ -17,7 +17,7 @@ export default function QuickOrderExtra({ show, close }) {
      {
      show ?
       <div
-        className="modalContainer"
+        className="modalContainer modalQuickOrderContainer"
       >
         <div className="modal" onClick={(e) => e.stopPropagation()}>
             <header className="modal_header">

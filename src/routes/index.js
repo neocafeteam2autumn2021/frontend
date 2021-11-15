@@ -11,13 +11,13 @@ function Routes() {
     const [width, height] = useWindowSize();
 
     const userSignin = useSelector((state) => state.userToken);
-    const { userInfoFull } = userSignin;
+    const { userInfoFull, userInfo } = userSignin;
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    return !userInfoFull ? <PublicRoutes /> : <PrivateSection />;
+    return userInfoFull || (userInfo && userInfo.dataCheckUser) ? <PrivateSection /> : <PublicRoutes />;
 }
 
 export default Routes;
