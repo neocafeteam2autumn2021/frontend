@@ -199,15 +199,15 @@ function LoginComponent() {
         if (otp.otp === '' || final === null)
             return;
         final.confirm(otp.otp).then((result) => {
+            let uid = result.user.uid;
             result.user.getIdToken(true)
             .then(latestToken => {
-                const userInfo = { latestToken, mynumber, dataCheckUser};
+                const userInfo = { uid, latestToken, mynumber, dataCheckUser};
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 dispatch({ type: USER_INFO_SUCCESS, payload: userInfo });
-                dataCheckUser ? history.push(SLUGS.registration) : history.push(SLUGS.menu);
+                dataCheckUser ? history.push(SLUGS.menu) : history.push(SLUGS.registration);
             });
         }).catch((err) => {
-            alert(err)
             setOtpWrong(true)
         })}
 

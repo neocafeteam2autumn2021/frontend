@@ -52,7 +52,7 @@ const useStyles = createUseStyles((theme) => ({
     }
 }));
 
-export default function InputProfile() {
+export default function InputProfile({ userData }) {
 
     const theme = useTheme();
     const classes = useStyles({ theme });
@@ -64,12 +64,11 @@ export default function InputProfile() {
     const [changed, setChanged] = useState(false);
 
     useEffect(() => {
-        const {name, surname, date, mynumber} = JSON.parse(localStorage.getItem('userInfoFull'));
-        setName(name);
-        setSurname(surname);
-        setDate(date);
-        setNumber(mynumber);
-      }, []);
+        setName(userData ? userData.name : '');
+        setSurname(userData ? userData.surname : '');
+        setDate(userData ? userData.date_of_birth.split("-").reverse().join(".") : '');
+        setNumber(userData ? userData.phone_number : '');
+      }, [userData]);
 
     const saveProfileIfo = () => {
         alert("saved")

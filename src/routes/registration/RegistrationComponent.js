@@ -90,7 +90,7 @@ function RegistrationComponent() {
         event.preventDefault();
         let b = {...{name, surname, date}, ...JSON.parse(localStorage.getItem('userInfo'))};
         setRegisterData(b);
-        dispatch(register(date.split(".").reverse().join("-"), b.latestToken, b.mynumber, name, surname));
+        dispatch(register(b.uid, date.split(".").reverse().join("-"), b.latestToken, b.mynumber, name, surname));
     }
     
     const onChangeDate = (e) => {

@@ -70,7 +70,7 @@ function LoadingComponent({
 
 LoadingComponent.defaultProps = {
     fullScreen: true,
-    zIndex: 10
+    zIndex: 40
 };
 
 export default LoadingComponent;

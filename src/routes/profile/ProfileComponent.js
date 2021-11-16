@@ -8,6 +8,7 @@ import Schedule from '../../components/etc/Schedule';
 import LoadingComponent from '../../components/loading/LoadingComponent';
 import ModalLogOut from '../../components/modal/ModalLogOut';
 import Tabs from '../../components/tabs/Tabs';
+import { getProfileInfo } from '../../redux/actions/profileActions';
 import { signout } from '../../redux/actions/userActions';
 import SLUGS from '../../resources/slugs';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
@@ -37,8 +38,8 @@ function ProfileComponent() {
   const classes = useStyles({ theme });
   const history = useHistory();
 
-  const allStatistics = useSelector((state) => state.allStatistics);
-  const { errorStatistics, loadingStatistics } = allStatistics;
+  const profileInfo = useSelector((state) => state.profileInfo);
+  const { errorProfile, loadingProfile, dataProfile } = profileInfo;
 
   const dispatch = useDispatch();
 
@@ -48,7 +49,7 @@ function ProfileComponent() {
     // if(errorStatistics && errorStatistics.indexOf("403") !== -1) {
     //   dispatch(signout());
     // }
-  }, [dispatch, errorStatistics]);
+  }, [dispatch, errorProfile]);
 
   const onClickLogOut = () => {
     dispatch(signout());
@@ -57,16 +58,17 @@ function ProfileComponent() {
   }
 
   useEffect(() => {
-    // dispatch(getStatistics());
+    dispatch(getProfileInfo());
   }, [dispatch]);
 
     return (
         <Column
           horizontal='center' style={{width: '100%'}}>
-            {loadingStatistics ? (
-              <LoadingComponent loading={loadingStatistics} />
+            {loadingProfile ? (
+              <LoadingComponent loading={loadingProfile} />
             ) : <>
-              <Tabs components={[<InputProfile />, <Schedule />]} names={["Личные данные", "График работы"]} />
+              <Tabs components={[<InputProfile userData={dataProfile ? dataProfile.user : null} />,
+                <Schedule userData={dataProfile ? dataProfile.schedule : null} />]} names={["Личные данные", "График работы"]} />
               <ModalLogOut onClickLogOut={onClickLogOut} showLogout={showLogout} setShowLogout={setShowLogout} />
               <button
                 className={classes.logOutButton}

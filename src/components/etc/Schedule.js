@@ -42,7 +42,7 @@ const useStyles = createUseStyles((theme) => ({
     }
 }));
 
-export default function Schedule() {
+export default function Schedule({ userData }) {
 
     const theme = useTheme();
     const classes = useStyles({ theme });
@@ -56,7 +56,7 @@ export default function Schedule() {
         var year = today.getFullYear();
         var date = new Date(year, month, 1);
         var days = [];
-        var daysName = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+        var daysName = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
         while (date.getMonth() === month) {
             let newObj = {}
             let newDate = new Date(date);
@@ -104,13 +104,17 @@ export default function Schedule() {
                     <li>Вс</li>
                 </ul>
                 <ul className="days">
-                    {monthDays.map((days) => {
+                    {userData && monthDays.map((days) => {
                         let key = Object.keys(days)[0];
                         let value = days[key];
                         if(value !== 0) {
                             if(value === day) return <li className="activeDay" key={value}>{value}</li>
-                            else if(key === "Пн" || key === "Сб" || key === "Вс") return <li className="workDays" key={value}>{value}</li>
-                            else if(key === "Ср") return <li className="workNights" key={value}>{value}</li>
+                            else if(userData.some((dd) => {
+                                return key === dd.schedule.day && (dd.schedule.start_hour === "08:00:00" || dd.schedule.start_hour === "10:00:00")
+                            })) return <li className="workDays" key={value}>{value}</li>
+                            else if(userData.some((dd) => {
+                                return key === dd.schedule.day && dd.schedule.start_hour === "16:00:00"
+                            })) return <li className="workNights" key={value}>{value}</li>
                             else return <li className="freeDays" key={value}>{value}</li>
                         }
                         return <li className="noDays" key={key}></li>

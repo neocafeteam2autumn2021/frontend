@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { createActivityReducer, deleteActivityReducer, getActivityReducer, getAllActivitiesReducer, updateActivityReducer } from './redux/reducers/activityReducers';
 import { createCategoryFoodReducer, deleteCategoryFoodReducer, getAllCategoriesReducer, getCategoryFoodReducer, updateCategoryFoodReducer } from './redux/reducers/categoryReducers';
 import { createFoodReducer, deleteFoodReducer, getAllFoodsReducer, getFoodReducer, updateFoodReducer } from './redux/reducers/foodReducers';
-import { getStatisticsReducer } from './redux/reducers/statisticsReducers';
+import { getProfileReducer } from './redux/reducers/profileReducers';
 import { checkUserReducer, getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userRegisterReducer, userSigninReducer, userTokenReducer } from './redux/reducers/userReducers';
 
 const initialState = {
@@ -21,7 +21,8 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userSignin: userSigninReducer,
   checkUser: checkUserReducer,
-  allStatistics: getStatisticsReducer,
+  profileInfo: getProfileReducer,
+  
   allUsers: getAllUsersReducer,
   allFoods: getAllFoodsReducer,
   allActivities: getAllActivitiesReducer,

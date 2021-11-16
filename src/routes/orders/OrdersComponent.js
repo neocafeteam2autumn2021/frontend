@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Column } from 'simple-flexbox';
 import LoadingComponent from '../../components/loading/LoadingComponent';
 import Tabs from '../../components/tabs/Tabs';
@@ -9,16 +9,18 @@ import TabsOrders from '../../components/tabsOrders/TabsOrders';
 
 function OrdersComponent() {
 
-  const allStatistics = useSelector((state) => state.allStatistics);
-  const { errorStatistics, loadingStatistics } = allStatistics;
+  // const allStatistics = useSelector((state) => state.allStatistics);
+  // const { errorStatistics, loadingStatistics } = allStatistics;
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  let loadingStatistics = false;
+
+  // useEffect(() => {
     // if(errorStatistics && errorStatistics.indexOf("403") !== -1) {
     //   dispatch(signout());
     // }
-  }, [dispatch, errorStatistics]);
+  // }, [dispatch, errorStatistics]);
 
   useEffect(() => {
     // dispatch(getStatistics());

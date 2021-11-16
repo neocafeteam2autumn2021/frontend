@@ -18,7 +18,7 @@ export const signin = (email, password) => async (dispatch) => {
     }
 };
 
-export const register = (date, latestToken, mynumber, name, surname) => async (dispatch) => {
+export const register = (uid, date, latestToken, mynumber, name, surname) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST });
   try {
     await Axios.post('https://neocafe-staging.herokuapp.com/register/',
@@ -26,6 +26,7 @@ export const register = (date, latestToken, mynumber, name, surname) => async (d
         name: name,
         registration_token: latestToken,
         device_type: "web",
+        uid: uid,
         type_of_user: 3,
         date_of_birth: date,
         surname: surname }
