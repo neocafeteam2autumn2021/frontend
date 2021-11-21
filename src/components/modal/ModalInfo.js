@@ -1,9 +1,8 @@
 import React from "react";
 import cancelModal from '../../assets/images/cancelModal.png';
-import сroissant from '../../assets/images/сroissant.png';
 import "./modal.css";
 
-const ModalInfo = ({ show, setModal }) => {
+const ModalInfo = ({ show, setModal, data }) => {
     
     return (
       <>
@@ -15,26 +14,22 @@ const ModalInfo = ({ show, setModal }) => {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <header className="modal_header">
                 <div className="modal_info-img">
-                    <img src={сroissant} alt="modal_info-img" />
+                    <img src={data.photo} alt="modal_info-img" />
                 </div>
                 <button className="close" onClick={() => setModal(false)}>
                     <img src={cancelModal} alt="cancelModal" />
                 </button>
             </header>
             <main className="modal_content">
-                <div className="modal_info-title">
-                    Круассан
-                </div>
-                <div className="modal_info-text">
-                    Небольшое мучное кондитерское изделие, булочка в форме полумесяца из слоёного теста с содержанием сливочного масла не менее 82 % жирности.
-                </div>
+                <div className="modal_info-title">{data.name}</div>
+                <div className="modal_info-text">{data.description}</div>
             </main>
             <footer className="modal_footer">
                 <div className="modal_footer-block">
-                    <div>125 c</div>
+                    <div>{data.price.slice(0, data.price.length-2)} c</div>
                 </div>
                 <div className="modal_footer-block">
-                    <button className="modal_footerAddBtn">Добавить</button>
+                    {!data.food_volumes.length ? <button className="modal_footerAddBtn">Добавить</button> : null}
                 </div>
             </footer>
           </div>

@@ -1,22 +1,43 @@
 import Axios from 'axios';
-import { CREATE_ACTIVITY_FAIL, CREATE_ACTIVITY_REQUEST, CREATE_ACTIVITY_SUCCESS, DELETE_ACTIVITY_FAIL, DELETE_ACTIVITY_REQUEST, DELETE_ACTIVITY_SUCCESS, GET_ACTIVITIES_FAIL, GET_ACTIVITIES_REQUEST, GET_ACTIVITIES_SUCCESS, GET_ACTIVITY_FAIL, GET_ACTIVITY_REQUEST, GET_ACTIVITY_SUCCESS, UPDATE_ACTIVITY_FAIL, UPDATE_ACTIVITY_REQUEST, UPDATE_ACTIVITY_SUCCESS } from '../constants/activityConstants';
+import { CREATE_ACTIVITY_FAIL, CREATE_ACTIVITY_REQUEST, CREATE_ACTIVITY_SUCCESS, DELETE_ACTIVITY_FAIL, DELETE_ACTIVITY_REQUEST, DELETE_ACTIVITY_SUCCESS, GET_ACTIVITY_FAIL, GET_ACTIVITY_REQUEST, GET_ACTIVITY_SUCCESS, GET_MENU_CATEGORIES_FAIL, GET_MENU_CATEGORIES_REQUEST, GET_MENU_CATEGORIES_SUCCESS, GET_MENU_FOODS_FAIL, GET_MENU_FOODS_REQUEST, GET_MENU_FOODS_SUCCESS, UPDATE_ACTIVITY_FAIL, UPDATE_ACTIVITY_REQUEST, UPDATE_ACTIVITY_SUCCESS } from '../constants/menuConstants';
 
-export const getAllActivities = () => async (dispatch, getState) => {
+export const getMenuCategories = () => async (dispatch, getState) => {
   dispatch({
-      type: GET_ACTIVITIES_REQUEST
+      type: GET_MENU_CATEGORIES_REQUEST
   });
   const {
-      userSignin: { userInfo },
+    userToken: { userInfo },
   } = getState();
   try {
-      const { data } = await Axios.get('http://167.172.167.145:9090/activities', {
+      const { data } = await Axios.get('https://neocafe-staging.herokuapp.com/menu/2/categories/', {
           headers: {
-              'Authorization': `Bearer ${userInfo.jwt}`
+              'Authorization': `Bearer ${userInfo.latestToken}`
           }
       });
-      dispatch({ type: GET_ACTIVITIES_SUCCESS, payload: data });
+      dispatch({ type: GET_MENU_CATEGORIES_SUCCESS, payload: data });
   } catch (error) {
-      dispatch({ type: GET_ACTIVITIES_FAIL, payload: error.message });
+      dispatch({ type: GET_MENU_CATEGORIES_FAIL, payload: error.message });
+  }
+}
+
+export const getMenuFoods = (menuCategories) => async (dispatch, getState) => {
+  dispatch({
+      type: GET_MENU_FOODS_REQUEST
+  });
+  const {
+    userToken: { userInfo },
+  } = getState();
+  try {
+      const data = await Axios.all(menuCategories.map((item) => {
+        return Axios.get(`https://neocafe-staging.herokuapp.com/menu/2/categories/${item.id}`, {
+          headers: {
+              'Authorization': `Bearer ${userInfo.latestToken}`
+          }
+      })}
+      ));
+      dispatch({ type: GET_MENU_FOODS_SUCCESS, payload: data });
+  } catch (error) {
+      dispatch({ type: GET_MENU_FOODS_FAIL, payload: error.message });
   }
 }
 

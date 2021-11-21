@@ -269,7 +269,6 @@ label {
   position: absolute;
   top: 114px;
   left: 32px;
-  width: 154px;
   font-weight: normal;
   font-size: 48px;
   color: #E9E9E9;
@@ -281,7 +280,7 @@ label {
   left: 32px;
   right: 32px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .beverageCardPrice {
   width: 120px;
@@ -305,7 +304,7 @@ label {
 }
 .beverageCardPriceSize {
   position: absolute;
-  left: 13px;
+  left: 9px;
   font-weight: normal;
   font-size: 40px;
   color: #968D8D;

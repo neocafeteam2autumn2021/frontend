@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { createActivityReducer, deleteActivityReducer, getActivityReducer, getAllActivitiesReducer, updateActivityReducer } from './redux/reducers/activityReducers';
+import { getMenuCategoriesReducer, getMenuFoodsReducer } from './redux/reducers/menuReducers';
 import { createCategoryFoodReducer, deleteCategoryFoodReducer, getAllCategoriesReducer, getCategoryFoodReducer, updateCategoryFoodReducer } from './redux/reducers/categoryReducers';
 import { createFoodReducer, deleteFoodReducer, getAllFoodsReducer, getFoodReducer, updateFoodReducer } from './redux/reducers/foodReducers';
 import { getProfileReducer } from './redux/reducers/profileReducers';
@@ -22,14 +22,12 @@ const reducer = combineReducers({
   userSignin: userSigninReducer,
   checkUser: checkUserReducer,
   profileInfo: getProfileReducer,
+
+  menuCategories: getMenuCategoriesReducer,
+  menuFoods: getMenuFoodsReducer,
   
   allUsers: getAllUsersReducer,
   allFoods: getAllFoodsReducer,
-  allActivities: getAllActivitiesReducer,
-  createdActivity: createActivityReducer,
-  activity: getActivityReducer,
-  deletedActivity: deleteActivityReducer,
-  updatedActivity: updateActivityReducer,
   food: getFoodReducer,
   updatedFood: updateFoodReducer,
   deletedFood: deleteFoodReducer,

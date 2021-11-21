@@ -1,16 +1,32 @@
-import { CREATE_ACTIVITY_FAIL, CREATE_ACTIVITY_REQUEST, CREATE_ACTIVITY_RESET, CREATE_ACTIVITY_SUCCESS, DELETE_ACTIVITY_FAIL, DELETE_ACTIVITY_REQUEST, DELETE_ACTIVITY_RESET, DELETE_ACTIVITY_SUCCESS, GET_ACTIVITIES_FAIL, GET_ACTIVITIES_REQUEST, GET_ACTIVITIES_SUCCESS, GET_ACTIVITY_FAIL, GET_ACTIVITY_REQUEST, GET_ACTIVITY_SUCCESS, UPDATE_ACTIVITY_FAIL, UPDATE_ACTIVITY_REQUEST, UPDATE_ACTIVITY_RESET, UPDATE_ACTIVITY_SUCCESS } from "../constants/activityConstants";
+import { CREATE_ACTIVITY_FAIL, CREATE_ACTIVITY_REQUEST, CREATE_ACTIVITY_RESET, CREATE_ACTIVITY_SUCCESS, DELETE_ACTIVITY_FAIL, DELETE_ACTIVITY_REQUEST, DELETE_ACTIVITY_RESET, DELETE_ACTIVITY_SUCCESS, GET_ACTIVITY_FAIL, GET_ACTIVITY_REQUEST, GET_ACTIVITY_SUCCESS, GET_MENU_CATEGORIES_FAIL, GET_MENU_CATEGORIES_REQUEST, GET_MENU_CATEGORIES_SUCCESS, GET_MENU_FOODS_FAIL, GET_MENU_FOODS_REQUEST, GET_MENU_FOODS_SUCCESS, UPDATE_ACTIVITY_FAIL, UPDATE_ACTIVITY_REQUEST, UPDATE_ACTIVITY_RESET, UPDATE_ACTIVITY_SUCCESS } from "../constants/menuConstants";
 
-export const getAllActivitiesReducer = (state = {}, action) => {
+export const getMenuCategoriesReducer = (state = {}, action) => {
     switch(action.type) {
-        case GET_ACTIVITIES_REQUEST:
-            return { loadingAllActivities: true };
-        case GET_ACTIVITIES_SUCCESS:
+        case GET_MENU_CATEGORIES_REQUEST:
+            return { loadingMenuCategories: true };
+        case GET_MENU_CATEGORIES_SUCCESS:
             return {
-                loadingAllActivities: false,
-                allActivitiesData: action.payload
+                loadingMenuCategories: false,
+                menuCategoriesData: action.payload
              };
-        case GET_ACTIVITIES_FAIL:
-            return { loadingAllActivities: false, errorAllActivities: action.payload };
+        case GET_MENU_CATEGORIES_FAIL:
+            return { loadingMenuCategories: false, errorMenuCategories: action.payload };
+        default:
+            return state;
+    }
+};
+
+export const getMenuFoodsReducer = (state = {}, action) => {
+    switch(action.type) {
+        case GET_MENU_FOODS_REQUEST:
+            return { loadingMenuFoods: true };
+        case GET_MENU_FOODS_SUCCESS:
+            return {
+                loadingMenuFoods: false,
+                menuFoodsData: action.payload
+             };
+        case GET_MENU_FOODS_FAIL:
+            return { loadingMenuFoods: false, errorMenuFoods: action.payload };
         default:
             return state;
     }

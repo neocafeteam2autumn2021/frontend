@@ -1,40 +1,42 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Column } from 'simple-flexbox';
 import LoadingComponent from '../../components/loading/LoadingComponent';
-// import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
 import SearchInput from '../../components/etc/SearchInput';
 import TabsMenu from '../../components/tabsMenu/TabsMenu';
+import { getMenuCategories, getMenuFoods } from '../../redux/actions/menuActions';
 
 function MainMenuComponent() {
 
-  // const allStatistics = useSelector((state) => state.allStatistics);
-  // const { errorStatistics, loadingStatistics } = allStatistics;
+  const menuCategories = useSelector((state) => state.menuCategories);
+  const { loadingMenuCategories, menuCategoriesData, errorMenuCategories } = menuCategories;
+
+  const menuFoods = useSelector((state) => state.menuFoods);
+  const { loadingMenuFoods, menuFoodsData, errorMenuFoods } = menuFoods;
 
   const dispatch = useDispatch();
 
-  let loadingStatistics = false;
-
-  // useEffect(() => {
-    // if(errorStatistics && errorStatistics.indexOf("403") !== -1) {
-    //   dispatch(signout());
-    // }
-  // }, [dispatch, errorStatistics]);
+  useEffect(() => {
+    if(menuCategoriesData) {
+      dispatch(getMenuFoods(menuCategoriesData));
+    }
+  }, [dispatch, menuCategoriesData]);
 
   useEffect(() => {
-    // dispatch(getStatistics());
+    dispatch(getMenuCategories());
   }, [dispatch]);
 
     return (
         <Column
           horizontal='center'>
-            {loadingStatistics ? (
-              <LoadingComponent loading={loadingStatistics} />
+            {(loadingMenuCategories || loadingMenuFoods) ? (
+              <LoadingComponent loading />
             ) : (
               <>
                   <SearchInput />
-                  <TabsMenu />
+                  <TabsMenu menuCategories={menuCategoriesData ? menuCategoriesData : null}
+                    menuFoods={menuFoodsData ? menuFoodsData : null} />
               </>
             )}
         </Column>
