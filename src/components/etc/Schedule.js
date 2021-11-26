@@ -110,10 +110,10 @@ export default function Schedule({ userData }) {
                         if(value !== 0) {
                             if(value === day) return <li className="activeDay" key={value}>{value}</li>
                             else if(userData.some((dd) => {
-                                return key === dd.schedule.day && (dd.schedule.start_hour === "08:00:00" || dd.schedule.start_hour === "10:00:00")
+                                return key === dd.day && (dd.start_hour === "08:00:00" || dd.start_hour === "10:00:00")
                             })) return <li className="workDays" key={value}>{value}</li>
                             else if(userData.some((dd) => {
-                                return key === dd.schedule.day && dd.schedule.start_hour === "16:00:00"
+                                return key === dd.day && dd.start_hour === "16:00:00"
                             })) return <li className="workNights" key={value}>{value}</li>
                             else return <li className="freeDays" key={value}>{value}</li>
                         }

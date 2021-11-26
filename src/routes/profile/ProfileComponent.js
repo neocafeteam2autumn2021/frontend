@@ -62,7 +62,7 @@ function ProfileComponent() {
               <LoadingComponent loading={loadingProfile} />
             ) : <>
               <Tabs components={[<InputProfile userData={dataProfile ? dataProfile.user : null} />,
-                <Schedule userData={dataProfile ? dataProfile.schedule : null} />]} names={["Личные данные", "График работы"]} />
+                <Schedule userData={dataProfile ? dataProfile.schedules : null} />]} names={["Личные данные", "График работы"]} />
               <ModalLogOut onClickLogOut={onClickLogOut} showLogout={showLogout} setShowLogout={setShowLogout} />
               <button
                 className={classes.logOutButton}
