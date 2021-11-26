@@ -5,7 +5,8 @@ const TabPaneOrders = (props) => {
   return <div className="tab-pane-orders">{props.childern}</div>;
 };
 TabPaneOrders.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
+  index: PropTypes.number
 };
 
 export default TabPaneOrders;

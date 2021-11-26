@@ -45,12 +45,6 @@ function ProfileComponent() {
 
   const [showLogout, setShowLogout] = useState(false);
 
-  useEffect(() => {
-    // if(errorStatistics && errorStatistics.indexOf("403") !== -1) {
-    //   dispatch(signout());
-    // }
-  }, [dispatch, errorProfile]);
-
   const onClickLogOut = () => {
     dispatch(signout());
     setShowLogout(false);

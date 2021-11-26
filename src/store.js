@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { getMenuCategoriesReducer, getMenuFoodsReducer } from './redux/reducers/menuReducers';
 import { createCategoryFoodReducer, deleteCategoryFoodReducer, getAllCategoriesReducer, getCategoryFoodReducer, updateCategoryFoodReducer } from './redux/reducers/categoryReducers';
-import { createFoodReducer, deleteFoodReducer, getAllFoodsReducer, getFoodReducer, updateFoodReducer } from './redux/reducers/foodReducers';
+import { getPlaceOrdersReducer, getTakeawayOrdersReducer } from './redux/reducers/orderReducers';
 import { getProfileReducer } from './redux/reducers/profileReducers';
 import { checkUserReducer, getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userRegisterReducer, userSigninReducer, userTokenReducer } from './redux/reducers/userReducers';
 
@@ -25,13 +25,12 @@ const reducer = combineReducers({
 
   menuCategories: getMenuCategoriesReducer,
   menuFoods: getMenuFoodsReducer,
-  
+
+  takeawayOrders: getTakeawayOrdersReducer,
+  placeOrders: getPlaceOrdersReducer,
+
   allUsers: getAllUsersReducer,
-  allFoods: getAllFoodsReducer,
-  food: getFoodReducer,
-  updatedFood: updateFoodReducer,
-  deletedFood: deleteFoodReducer,
-  createdFood: createFoodReducer,
+
   allCategories: getAllCategoriesReducer,
   categoryFood: getCategoryFoodReducer,
   updatedCategoryFood: updateCategoryFoodReducer,

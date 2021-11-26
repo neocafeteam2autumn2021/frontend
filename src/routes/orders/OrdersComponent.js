@@ -1,39 +1,44 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Column } from 'simple-flexbox';
 import LoadingComponent from '../../components/loading/LoadingComponent';
 import Tabs from '../../components/tabs/Tabs';
 import TabsOrders from '../../components/tabsOrders/TabsOrders';
-// import { getStatistics } from '../../redux/actions/statisticsActions';
+import { getPlaceOrders, getTakeawayOrders } from '../../redux/actions/orderActions';
 // import { signout } from '../../redux/actions/userActions';
 
 function OrdersComponent() {
 
-  // const allStatistics = useSelector((state) => state.allStatistics);
-  // const { errorStatistics, loadingStatistics } = allStatistics;
+  const placeOrders = useSelector((state) => state.placeOrders);
+  const { loadingPlaceOrders, placeOrdersData, errorPlaceOrders } = placeOrders;
+  const takeawayOrders = useSelector((state) => state.takeawayOrders);
+  const { loadingTakeawayOrders, takeawayOrdersData, errorTakeawayOrders } = takeawayOrders;
 
   const dispatch = useDispatch();
 
-  let loadingStatistics = false;
+  console.log(placeOrdersData);
+  console.log(takeawayOrdersData);
 
-  // useEffect(() => {
-    // if(errorStatistics && errorStatistics.indexOf("403") !== -1) {
-    //   dispatch(signout());
-    // }
-  // }, [dispatch, errorStatistics]);
+  const [placeOrdersId, setPlaceOrdersId] = useState(1);
+  const [takeawayOrdersId, setTakeawayOrdersId] = useState(1);
 
   useEffect(() => {
-    // dispatch(getStatistics());
-  }, [dispatch]);
+    dispatch(getPlaceOrders(placeOrdersId));
+    dispatch(getTakeawayOrders(takeawayOrdersId));
+  }, [dispatch, placeOrdersId, takeawayOrdersId]);
+
 
     return (
         <Column
           horizontal='center'>
-            {loadingStatistics ? (
-              <LoadingComponent loading={loadingStatistics} />
+            {loadingTakeawayOrders || loadingPlaceOrders ? (
+              <LoadingComponent loading />
             ) : (
               <>
-                <Tabs components={[<TabsOrders />, <TabsOrders />]} names={["В заведении", "На вынос"]} />
+                <Tabs components={
+                  [<TabsOrders changeSection={setPlaceOrdersId} sectionId={placeOrdersId} data={placeOrdersData ? placeOrdersData : null} />,
+                  <TabsOrders changeSection={setTakeawayOrdersId} sectionId={takeawayOrdersId} data={takeawayOrdersData ? takeawayOrdersData : null} />]}
+                  names={["В заведении", "На вынос"]} />
               </>
             )}
         </Column>

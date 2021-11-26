@@ -11,40 +11,41 @@ const TabOrders = (props) => {
     const childCnt = {};
     React.Children.forEach(children, (element) => {
       if (!React.isValidElement(element)) return;
-      const { name, type } = element.props;
-      headers.push({name, type });
-      childCnt[name] = element.props.children;
+      const { name, index, sectionId, changeSection } = element.props;
+      headers.push({ name, index, sectionId, changeSection });
+      childCnt[index] = element.props.children;
     });
     setTabHeader(headers);
-    setActive(headers[0]["name"]);
+    setActive(headers[0]["sectionId"]);
     setChildConent({ ...childCnt });
   }, [props, children]);
 
-  const changeTab = (name) => {
-    setActive(name);
+  const changeTab = (index, changeSection) => {
+    changeSection(index);
   };
 
   return (
     <div className="tabsOrders">
         <ul className="tabHeaderOrders">
-        {tabHeader.map(({name, type}) => (
+        {tabHeader.map(({name, index, changeSection}) => {
+        return (
             <li
-                onClick={() => changeTab(name)}
+                onClick={() => changeTab(index, changeSection)}
                 key={name}
-                className={name === active ? "active" : ""}>
-                {type === "all" ? <div className="tabHeaderOrdersAll"></div> :
-                  type === "new" ? <div className="tabHeaderOrdersNew"></div> :
-                  type === "process" ? <div className="tabHeaderOrdersProcess"></div> :
-                  type === "ready" ? <div className="tabHeaderOrdersReady"></div> :
-                  type === "cancel" ? <div className="tabHeaderOrdersCancel"></div> :
-                  type === "end" ? <div className="tabHeaderOrdersEnd"></div> : null}
+                className={index === active ? "active" : ""}>
+                {name === "Все" ? <div className="tabHeaderOrdersAll"></div> :
+                  name === "Новый" ? <div className="tabHeaderOrdersNew"></div> :
+                  name === "В процессе" ? <div className="tabHeaderOrdersProcess"></div> :
+                  name === "Готово" ? <div className="tabHeaderOrdersReady"></div> :
+                  name === "Отменено" ? <div className="tabHeaderOrdersCancel"></div> :
+                  name === "Завершено" ? <div className="tabHeaderOrdersEnd"></div> : null}
                 {name}
             </li>
-            ))}
+            )})}
         </ul>
         <div className="tabContentOrders">
             {Object.keys(childContent).map((key) => {
-            if (key === active) {
+            if (key == active) {
                 return <div className="tabChildOrders" key={key}>{childContent[key]}</div>;
             } else {
                 return null;

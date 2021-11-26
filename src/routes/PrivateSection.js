@@ -5,13 +5,11 @@ import { SidebarComponent, SidebarContext } from '../components/sidebar';
 import PrivateRoutes from './PrivateRoutes';
 
 const useStyles = createUseStyles({
-    container: {
-        height: '100%',
-    },
     mainBlock: {
         marginLeft: 80,
         backgroundColor: ({ theme }) => theme.color.blueCharcoal,
         display: 'flex',
+        minHeight: '100vh',
         justifyContent: 'space-around',
     },
     contentBlock: {
