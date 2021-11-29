@@ -27,6 +27,7 @@
 }
 .processOrderCardHeader {
     background-color: #FFDC5D;
+    color: #343545;
 }
 .readyOrderCardHeader {
     background-color: #4CC179;
@@ -50,14 +51,27 @@
 .close:hover img {
     transform: scale(1.1);
 }
+.orderCardBodyHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    color: #FFFFFF;
+}
+.orderCardBodyHeader div:first-child {
+    font-weight: bold;
+}
 .orderCardBody {
     padding: 11px 12px;
     border-bottom: 2px solid #3D3E48;
+    height: 340px;
+    overflow-y: scroll;
 }
-.orderCardTime {
-    text-align: right;
-    font-size: 18px;
-    color: #FFFFFF;
+.orderCardBody::-webkit-scrollbar {
+    display: none;
+}
+.orderCardBody {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 .orderCardOrder {
     color: #E9E9E9;
@@ -67,6 +81,7 @@
     border-radius: 10px;
     margin: 10px 0;
     padding: 10px;
+    overflow: hidden;
 }
 .cardOrderHeader {
     display: flex;
