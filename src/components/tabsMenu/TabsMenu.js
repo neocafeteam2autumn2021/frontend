@@ -5,7 +5,6 @@ import TabMenuPane from "./TabMenuPane";
 import MenuCard from "../menuCards/MenuCard";
 
 export default function TabsMenu({ menuCategories, menuFoods }) {
-  console.log(menuFoods);
   return (
       <div className="tabsContainerMenu">
         <TabMenu>

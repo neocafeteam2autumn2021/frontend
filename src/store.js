@@ -1,23 +1,18 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { getMenuCategoriesReducer, getMenuFoodsReducer } from './redux/reducers/menuReducers';
-import { createCategoryFoodReducer, deleteCategoryFoodReducer, getAllCategoriesReducer, getCategoryFoodReducer, updateCategoryFoodReducer } from './redux/reducers/categoryReducers';
 import { getPlaceOrdersReducer, getTakeawayOrdersReducer } from './redux/reducers/orderReducers';
 import { getProfileReducer } from './redux/reducers/profileReducers';
-import { checkUserReducer, getAllUsersReducer, getUserAgreementReducer, putUserAgreementReducer, userRegisterReducer, userSigninReducer, userTokenReducer } from './redux/reducers/userReducers';
+import { checkUserReducer, userRegisterReducer, userSigninReducer } from './redux/reducers/userReducers';
 
 const initialState = {
-  userToken: {
+  userSignin: {
     userInfo: localStorage.getItem('userInfo')
       ? JSON.parse(localStorage.getItem('userInfo'))
-      : null,
-    userInfoFull: localStorage.getItem('userInfoFull')
-      ? JSON.parse(localStorage.getItem('userInfoFull'))
-      : null,
+      : null
   }
 };
 const reducer = combineReducers({
-  userToken: userTokenReducer,
   userRegister: userRegisterReducer,
   userSignin: userSigninReducer,
   checkUser: checkUserReducer,
@@ -28,16 +23,6 @@ const reducer = combineReducers({
 
   takeawayOrders: getTakeawayOrdersReducer,
   placeOrders: getPlaceOrdersReducer,
-
-  allUsers: getAllUsersReducer,
-
-  allCategories: getAllCategoriesReducer,
-  categoryFood: getCategoryFoodReducer,
-  updatedCategoryFood: updateCategoryFoodReducer,
-  deletedCategoryFood: deleteCategoryFoodReducer,
-  createdCategoryFood: createCategoryFoodReducer,
-  userAgreement: getUserAgreementReducer,
-  updatedUserAgreement: putUserAgreementReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

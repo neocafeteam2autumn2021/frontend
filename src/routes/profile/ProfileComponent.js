@@ -9,7 +9,7 @@ import LoadingComponent from '../../components/loading/LoadingComponent';
 import ModalLogOut from '../../components/modal/ModalLogOut';
 import Tabs from '../../components/tabs/Tabs';
 import { getProfileInfo } from '../../redux/actions/profileActions';
-import { signout } from '../../redux/actions/userActions';
+import { refreshToken, signout } from '../../redux/actions/userActions';
 import SLUGS from '../../resources/slugs';
 // import { getStatistics } from '../../redux/actions/statisticsActions';
 // import { signout } from '../../redux/actions/userActions';
@@ -50,6 +50,14 @@ function ProfileComponent() {
     setShowLogout(false);
     history.push(SLUGS.login);
   }
+
+  useEffect(() => {
+    if(errorProfile && errorProfile.indexOf("401")) {
+      const { refresh } = JSON.parse(localStorage.getItem('userInfo'));
+      dispatch(refreshToken(refresh));
+      dispatch(getProfileInfo());
+    }
+  }, [dispatch, errorProfile]);
 
   useEffect(() => {
     dispatch(getProfileInfo());

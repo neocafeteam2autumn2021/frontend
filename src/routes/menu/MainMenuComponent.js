@@ -6,6 +6,7 @@ import LoadingComponent from '../../components/loading/LoadingComponent';
 import SearchInput from '../../components/etc/SearchInput';
 import TabsMenu from '../../components/tabsMenu/TabsMenu';
 import { getMenuCategories, getMenuFoods } from '../../redux/actions/menuActions';
+import { refreshToken } from '../../redux/actions/userActions';
 
 function MainMenuComponent() {
 
@@ -13,15 +14,19 @@ function MainMenuComponent() {
   const { loadingMenuCategories, menuCategoriesData, errorMenuCategories } = menuCategories;
 
   const menuFoods = useSelector((state) => state.menuFoods);
-  const { loadingMenuFoods, menuFoodsData, errorMenuFoods } = menuFoods;
+  const { loadingMenuFoods, menuFoodsData } = menuFoods;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if(menuCategoriesData) {
       dispatch(getMenuFoods(menuCategoriesData));
+    } else if(errorMenuCategories && errorMenuCategories.indexOf("401")) {
+      const { refresh } = JSON.parse(localStorage.getItem('userInfo'));
+      dispatch(refreshToken(refresh));
+      dispatch(getMenuCategories());
     }
-  }, [dispatch, menuCategoriesData]);
+  }, [dispatch, menuCategoriesData, errorMenuCategories]);
 
   useEffect(() => {
     dispatch(getMenuCategories());

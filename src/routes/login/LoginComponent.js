@@ -8,11 +8,8 @@ import { auth } from "../../firebase";
 import firebase from "firebase/app";
 import auth_back from "../../assets/images/auth_back.png";
 import OtpInput from 'react-otp-input';
-import { useHistory } from 'react-router';
-import SLUGS from '../../resources/slugs';
 import LoadingComponent from '../../components/loading/LoadingComponent';
-import { checkUser } from '../../redux/actions/userActions';
-import { USER_INFO_SUCCESS } from '../../redux/constants/userConstants';
+import { checkUser, login } from '../../redux/actions/userActions';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -134,7 +131,6 @@ const useStyles = createUseStyles((theme) => ({
 function LoginComponent() {
     const theme = useTheme();
     const classes = useStyles({ theme });
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const checkUserReq = useSelector((state) => state.checkUser);
@@ -161,14 +157,12 @@ function LoginComponent() {
 
     // Sent OTP
     const signin = () => {
-        
         if (mynumber === "" || mynumber.length < 10) return;
-
         dispatch(checkUser(mynumber));
         let verify = new firebase.auth.RecaptchaVerifier('recaptcha-container', {size: "invisible"});
         auth.signInWithPhoneNumber(mynumber, verify).then((result) => {
             setfinal(result);
-            setTimeLeft(30)
+            setTimeLeft(30);
             setshow(true);
         })
         .catch((err) => {
@@ -196,17 +190,11 @@ function LoginComponent() {
 
     // Validate OTP
     const ValidateOtp = () => {
-        if (otp.otp === '' || final === null)
+        if (otp.otp === '' || final === null || !dataCheckUser)
             return;
         final.confirm(otp.otp).then((result) => {
             let uid = result.user.uid;
-            result.user.getIdToken(true)
-            .then(latestToken => {
-                const userInfo = { uid, latestToken, mynumber, dataCheckUser};
-                localStorage.setItem('userInfo', JSON.stringify(userInfo));
-                dispatch({ type: USER_INFO_SUCCESS, payload: userInfo });
-                dataCheckUser ? history.push(SLUGS.menu) : history.push(SLUGS.registration);
-            });
+            dispatch(login(uid));
         }).catch((err) => {
             setOtpWrong(true)
         })}
@@ -229,10 +217,10 @@ function LoginComponent() {
                             type="tel" placeholder="+996 (000) 00 00 00"
                             onChange={onChangePhone}
                             required />
-                    <div id="recaptcha-container"></div>
-                    <button
-                        className={mynumber.length > 0 ? `${classes.activeButton} ${classes.button}` : `${classes.nextButton} ${classes.button}`}
-                        onClick={signin}>Далее</button>
+                        <div id="recaptcha-container"></div>
+                        <button
+                            className={mynumber.length > 0 ? `${classes.activeButton} ${classes.button}` : `${classes.nextButton} ${classes.button}`}
+                            onClick={signin}>Далее</button>
                     </div>
                     <div className={classes.innerBlock} style={{ display: show ? "flex" : "none" }}>
                         <div className={classes.blockTitle}>

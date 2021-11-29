@@ -6,12 +6,12 @@ export const getProfileInfo = () => async (dispatch, getState) => {
         type: GET_PROFILE_REQUEST
     });
     const {
-        userToken: { userInfo },
+        userSignin: { userInfo },
     } = getState();
     try {
         const { data } = await Axios.get('https://neocafe-staging.herokuapp.com/employee/profile/', {
             headers: {
-                'Authorization': `Bearer ${userInfo.latestToken}`
+                'Authorization': `Bearer ${userInfo.access}`
             }
         });
         dispatch({ type: GET_PROFILE_SUCCESS, payload: data });

@@ -6,12 +6,12 @@ export const getTakeawayOrders = (id) => async (dispatch, getState) => {
       type: GET_TAKEAWAY_ORDERS_REQUEST
   });
   const {
-    userToken: { userInfo },
+    userSignin: { userInfo },
   } = getState();
   try {
       const { data } = await Axios.get(`https://neocafe-staging.herokuapp.com/orders/${id}/`, {
           headers: {
-              'Authorization': `Bearer ${userInfo.latestToken}`
+              'Authorization': `Bearer ${userInfo.access}`
           }
       });
       dispatch({ type: GET_TAKEAWAY_ORDERS_SUCCESS, payload: data });
@@ -25,12 +25,12 @@ export const getPlaceOrders = (id) => async (dispatch, getState) => {
         type: GET_PLACE_ORDERS_REQUEST
     });
     const {
-        userToken: { userInfo },
+        userSignin: { userInfo },
     } = getState();
     try {
         const { data } = await Axios.get(`https://neocafe-staging.herokuapp.com/in_place_orders/${id}/`, {
             headers: {
-                'Authorization': `Bearer ${userInfo.latestToken}`
+                'Authorization': `Bearer ${userInfo.access}`
             }
         });
         dispatch({ type: GET_PLACE_ORDERS_SUCCESS, payload: data });

@@ -13,8 +13,9 @@ const SLUGS = {
     editActivity: '/activity/editActivity/:id',
     usersAgreement: '/usersAgreement',
     // auth
+    init: '/',
     login: '/login',
-    registration: '/registration',
+    registry: '/registration',
 };
 
 export default SLUGS;

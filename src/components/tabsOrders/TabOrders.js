@@ -45,7 +45,7 @@ const TabOrders = (props) => {
         </ul>
         <div className="tabContentOrders">
             {Object.keys(childContent).map((key) => {
-            if (key == active) {
+            if (key === active.toString()) {
                 return <div className="tabChildOrders" key={key}>{childContent[key]}</div>;
             } else {
                 return null;
