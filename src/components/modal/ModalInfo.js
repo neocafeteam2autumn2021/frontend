@@ -1,12 +1,21 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import cancelModal from '../../assets/images/cancelModal.png';
 import { addQuickOrder } from "../../redux/actions/orderActions";
 import "./modal.css";
 
-const ModalInfo = ({ show, setModal, data }) => {
+const ModalInfo = ({ show, setShow, data }) => {
 
   const dispatch = useDispatch();
+
+  const addQuickOrd = useSelector((state) => state.addQuickOrder);
+  const { addQuickOrderData } = addQuickOrd;
+
+  useEffect(() => {
+    if(addQuickOrderData) {
+      setShow(false);
+    }
+  }, [addQuickOrderData, setShow]);
 
   const onClickAdd = () => dispatch(addQuickOrder(data.id));
     return (
@@ -21,7 +30,7 @@ const ModalInfo = ({ show, setModal, data }) => {
                 <div className="modal_info-img">
                     <img src={data.photo} alt="modal_info-img" />
                 </div>
-                <button className="close" onClick={() => setModal(false)}>
+                <button className="close" onClick={() => setShow(false)}>
                     <img src={cancelModal} alt="cancelModal" />
                 </button>
             </header>

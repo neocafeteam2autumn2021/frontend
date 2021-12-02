@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuickOrders } from "../../redux/actions/orderActions";
 import { ADD_QUICK_ORDER_RESET } from "../../redux/constants/orderConstants";
+import LoadingComponent from "../loading/LoadingComponent";
 import ModalAccept from "../modal/ModalAccept";
 import ModalCloseAccount from "../modal/ModalCloseAccount";
 import QuickOrderCard from "../quickOrderCard/QuickOrderCard";
+import Toast from "../toast/Toast";
 import "./quickOrder.css";
 
 const QuickOrder = ({data}) => {
+
+  const [list, setList] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -24,10 +28,13 @@ const QuickOrder = ({data}) => {
 
   useEffect(() => {
     if(addQuickOrderData) {
+      setList([...list, {id: 1, title: 'Добавлено успешно!', type: "success"}]);
       dispatch(getQuickOrders());
       dispatch({ type: ADD_QUICK_ORDER_RESET });
+    } else if(errorAddQuickOrder) {
+      setList([...list, {id: 2, title: 'Ошибка', description: errorAddQuickOrder, type: "error"}]);
     }
-  }, [dispatch, addQuickOrderData]);
+  }, [dispatch, addQuickOrderData, errorAddQuickOrder, list]);
 
     
     return (
@@ -37,6 +44,8 @@ const QuickOrder = ({data}) => {
         <div
           className="quickOrderContainer"
         >
+          {loadingAddQuickOrder ? <LoadingComponent loading /> : null}
+          <Toast toastList={list} />
           <ModalAccept setAccepted={setAccepted} showAccept={showAccept} onClickAccepted={onClickAccepted} />
           <ModalCloseAccount setShowCLoseAcc={setShowCLoseAcc} showCLoseAcc={showCLoseAcc} onClickCLoseAcc={onClickCLoseAcc} />
             <header className="quickOrder_header">

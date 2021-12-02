@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createUseStyles, useTheme } from 'react-jss';
 import { useSelector } from 'react-redux';
 import QuickOrder from '../components/quickOrder/QuickOrder';
@@ -46,8 +46,16 @@ function PrivateSection() {
     const theme = useTheme();
     const classes = useStyles({ theme });
 
+    const [list, setList] = useState([]);
+
     const quickOrders = useSelector((state) => state.quickOrders);
-    const { loadingQuickOrders, quickOrdersData, errorQuickOrders } = quickOrders;
+    const { quickOrdersData, errorQuickOrders } = quickOrders;
+
+    useEffect(() => {
+        if(errorQuickOrders) {
+            setList([...list, {id: 1, title: 'Ошибка', description: errorQuickOrders, type: "error"}]);
+        }
+      }, [errorQuickOrders, list]);
 
     return (
         <SidebarContext>

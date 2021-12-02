@@ -14,7 +14,7 @@ export default function MenuCard({data}) {
   return (
     <>
       <ModalBeverageCard showBevCard={showBevCard} setShowBevCard={setShowBevCard} toggle={Toggle} data={data} />
-      <ModalInfo show={modal} setModal={setModal} data={data} />
+      <ModalInfo show={modal} setShow={setModal} data={data} />
       <div className="menuCard" onClick={() => data.food_volumes.length && setShowBevCard(true)}>
         <div className="menuCardTitle">{data.name}</div>
         {!data.food_volumes.length ? <div className="menuCardInfo" onClick={Toggle}>

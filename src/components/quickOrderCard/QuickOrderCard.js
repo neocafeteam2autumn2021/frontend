@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import quickOrderCardOption from '../../assets/images/quickOrderCardOption.png';
-import cappuccino from '../../assets/images/cappuccino.png';
 import InputSpinnerNumber from "../etc/InputSpinnerNumber";
 import "./quickOrderCard.css";
 import QuickOrderExtra from "../modal/QuickOrderExtra";
 
 export default function QuickOrderCard({options, data}) {
-  
+
   const [modal, setModal] = useState (false);
   const [pieces, setPieces] = useState (data.quantity);
   const Toggle = () => setModal(!modal);
