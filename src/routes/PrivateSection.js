@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createUseStyles, useTheme } from 'react-jss';
+import { useSelector } from 'react-redux';
 import QuickOrder from '../components/quickOrder/QuickOrder';
 import { SidebarComponent, SidebarContext } from '../components/sidebar';
 import PrivateRoutes from './PrivateRoutes';
@@ -45,15 +46,16 @@ function PrivateSection() {
     const theme = useTheme();
     const classes = useStyles({ theme });
 
-    const [showQuickOrder, setShowQuickOrder] = useState(true);
+    const quickOrders = useSelector((state) => state.quickOrders);
+    const { loadingQuickOrders, quickOrdersData, errorQuickOrders } = quickOrders;
 
     return (
         <SidebarContext>
             <div className={classes.container}>
                 <SidebarComponent />
                 <div className={classes.mainBlock}>
-                    <QuickOrder showQuickOrder={showQuickOrder} setShowQuickOrder={setShowQuickOrder} />
-                    <div className={showQuickOrder ? classes.contentBlockQuickOrder : classes.contentBlock}>
+                    <QuickOrder data={quickOrdersData} />
+                    <div className={quickOrdersData ? classes.contentBlockQuickOrder : classes.contentBlock}>
                         <PrivateRoutes />
                     </div>
                 </div>

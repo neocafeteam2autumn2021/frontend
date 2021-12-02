@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import cancelModal from '../../assets/images/cancelModal.png';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getQuickOrders } from "../../redux/actions/orderActions";
+import { ADD_QUICK_ORDER_RESET } from "../../redux/constants/orderConstants";
 import ModalAccept from "../modal/ModalAccept";
 import ModalCloseAccount from "../modal/ModalCloseAccount";
 import QuickOrderCard from "../quickOrderCard/QuickOrderCard";
 import "./quickOrder.css";
 
-const QuickOrder = ({showQuickOrder, setShowQuickOrder}) => {
-  const closeQuickOrder = () => setShowQuickOrder(false);
+const QuickOrder = ({data}) => {
+
+  const dispatch = useDispatch();
 
   const [showAccept, setShowAccepted] = useState(false);
   const onClickAccepted = () => setShowAccepted(!showAccept);
@@ -16,11 +19,21 @@ const QuickOrder = ({showQuickOrder, setShowQuickOrder}) => {
 
   const [accepted, setAccepted] = useState(false);
 
+  const addQuickOrder = useSelector((state) => state.addQuickOrder);
+  const { loadingAddQuickOrder, addQuickOrderData, errorAddQuickOrder } = addQuickOrder;
+
+  useEffect(() => {
+    if(addQuickOrderData) {
+      dispatch(getQuickOrders());
+      dispatch({ type: ADD_QUICK_ORDER_RESET });
+    }
+  }, [dispatch, addQuickOrderData]);
+
     
     return (
       <>
        {
-       showQuickOrder ?
+       data ?
         <div
           className="quickOrderContainer"
         >
@@ -29,23 +42,18 @@ const QuickOrder = ({showQuickOrder, setShowQuickOrder}) => {
             <header className="quickOrder_header">
                 <div className="quickOrder_title">
                     На вынос</div>
-                <button className="close" onClick={closeQuickOrder}>
-                    <img src={cancelModal} alt="cancelModal" />
-                </button>
             </header>
             <main className="quickOrderContent">
-              <div className="quickOrderContent_title">Заказ М-56</div>
-                <QuickOrderCard options={['M 350 мл', 'Карамельный сироп']} />
-                <QuickOrderCard />
-                <QuickOrderCard />
-                <QuickOrderCard />
-                <QuickOrderCard />
+              <div className="quickOrderContent_title">Заказ М-{data.id}</div>
+                {data.orders.map((order) => {
+                  return <QuickOrderCard data={order} id={order.id} />
+                })}
             </main>
             <footer>
               <button className="quickOrderContentAddBtn quickOrderBtn">Добавить ещё</button>
               <div className="quickOrder_total">
                 <div>Итого:</div>
-                <div>780 с</div>
+                <div>{data.the_total_cost} с</div>
               </div>
               {accepted ? <button onClick={onClickCLoseAcc} className="quickOrderContentEndBtn quickOrderBtn">Закрыть счёт</button> :
               <button onClick={onClickAccepted} className="quickOrderContentEndBtn quickOrderBtn">Оформить заказ</button>}

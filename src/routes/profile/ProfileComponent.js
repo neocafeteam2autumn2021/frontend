@@ -48,7 +48,7 @@ function ProfileComponent() {
   const onClickLogOut = () => {
     dispatch(signout());
     setShowLogout(false);
-    history.push(SLUGS.login);
+    history.push(SLUGS.init);
   }
 
   useEffect(() => {

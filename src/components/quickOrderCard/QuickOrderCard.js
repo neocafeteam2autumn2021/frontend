@@ -5,22 +5,22 @@ import InputSpinnerNumber from "../etc/InputSpinnerNumber";
 import "./quickOrderCard.css";
 import QuickOrderExtra from "../modal/QuickOrderExtra";
 
-export default function QuickOrderCard({options}) {
+export default function QuickOrderCard({options, data}) {
   
   const [modal, setModal] = useState (false);
-  const [pieces, setPieces] = useState (1);
+  const [pieces, setPieces] = useState (data.quantity);
   const Toggle = () => setModal(!modal);
 
   return (
       <div className="quickOrderCard">
-        <QuickOrderExtra show={modal} close={Toggle} />
+        <QuickOrderExtra show={modal} close={Toggle} data={data} />
         <div className="quickOrderCardContent">
           <div className="quickOrderCardLeftBlock">
-            <img src={cappuccino} alt="cappuccino" />
+            <img src={data.food.photo} alt="cappuccino" />
           </div>
           <div className="quickOrderCardRightBlock">
             <div className="quickOrderCardHeader">
-              <div className="quickOrderCardTitle">Капучино</div>
+              <div className="quickOrderCardTitle">{data.food.name}</div>
               <div className="quickOrderCardOption" onClick={() => Toggle()}>
                 <img src={quickOrderCardOption} alt="quickOrderCardOption" />
               </div>
@@ -33,7 +33,7 @@ export default function QuickOrderCard({options}) {
           </div>
         </div>
         <div className="quickOrderCardFooter">
-          <div className="quickOrderCardPrice">130 с</div>
+          <div className="quickOrderCardPrice">{data.total_cost.slice(0, data.total_cost.length-2)} с</div>
           <InputSpinnerNumber pieces={pieces} setPieces={setPieces} background={"no"} />
         </div>
       </div>

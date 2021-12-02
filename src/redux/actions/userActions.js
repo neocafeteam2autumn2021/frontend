@@ -9,15 +9,9 @@ export const refreshToken = (refreshToken) => async (dispatch) => {
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: newUserInfo });
     localStorage.setItem('userInfo', JSON.stringify(newUserInfo));
   } catch (error) {
-    console.log(error);
-    // dispatch({
-    //   type: USER_SIGNIN_FAIL,
-    //   payload:
-    //     error.response && error.response.data.message
-    //       ? error.response.data.message
-    //       : error.message,
-    // });
-  }
+    localStorage.removeItem('userInfo');
+    dispatch({ type: USER_SIGNOUT });
+    }
 };
 
 export const login = (uid) => async (dispatch) => {

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Column } from 'simple-flexbox';
 import LoadingComponent from '../../components/loading/LoadingComponent';
-// import { signout } from '../../redux/actions/userActions';
 import SearchInput from '../../components/etc/SearchInput';
 import TabsMenu from '../../components/tabsMenu/TabsMenu';
 import { getMenuCategories, getMenuFoods } from '../../redux/actions/menuActions';

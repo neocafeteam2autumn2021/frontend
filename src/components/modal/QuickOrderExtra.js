@@ -3,7 +3,7 @@ import cancelModal from '../../assets/images/cancelModal.png';
 import InputSpinnerNumber from "../etc/InputSpinnerNumber";
 import './modal.css';
 
-export default function QuickOrderExtra({ show, close }) {
+export default function QuickOrderExtra({ show, close, data }) {
   const [state, setState] = useState({
         "Шоколадный сироп": true,
         "Карамельный сироп": false,
@@ -22,7 +22,7 @@ export default function QuickOrderExtra({ show, close }) {
         <div className="modal" onClick={(e) => e.stopPropagation()}>
             <header className="modal_header">
                 <div className="modal_header-title">
-                    Капучино {pieces * 110} с</div>
+                    {data.food.name} {pieces * data.food.price} с</div>
                 <button className="close" onClick={() => close()}>
                     <img src={cancelModal} alt="cancelModal" />
                 </button>
@@ -51,7 +51,7 @@ export default function QuickOrderExtra({ show, close }) {
           <footer className="modal_footer">
               <div className="modal_footer-block">
                   <div>Итого:</div>
-                  <div>125 c</div>
+                  <div>{data.food.price * 1} c</div>
               </div>
               <div className="modal_footer-block">
                   <InputSpinnerNumber pieces={pieces} setPieces={setPieces} />

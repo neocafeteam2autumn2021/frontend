@@ -1,9 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import cancelModal from '../../assets/images/cancelModal.png';
+import { addQuickOrder } from "../../redux/actions/orderActions";
 import "./modal.css";
 
 const ModalInfo = ({ show, setModal, data }) => {
-    
+
+  const dispatch = useDispatch();
+
+  const onClickAdd = () => dispatch(addQuickOrder(data.id));
     return (
       <>
        {
@@ -29,7 +34,7 @@ const ModalInfo = ({ show, setModal, data }) => {
                     <div>{data.price.slice(0, data.price.length-2)} c</div>
                 </div>
                 <div className="modal_footer-block">
-                    {!data.food_volumes.length ? <button className="modal_footerAddBtn">Добавить</button> : null}
+                    {!data.food_volumes.length ? <button className="modal_footerAddBtn" onClick={onClickAdd}>Добавить</button> : null}
                 </div>
             </footer>
           </div>

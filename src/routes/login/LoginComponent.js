@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Column } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { signin } from '../../redux/actions/userActions';
-// import LoadingComponent from '../../components/loading/LoadingComponent';
 import { auth } from "../../firebase";
 import firebase from "firebase/app";
 import auth_back from "../../assets/images/auth_back.png";
@@ -158,7 +156,7 @@ function LoginComponent() {
     // Sent OTP
     const signin = () => {
         if (mynumber === "" || mynumber.length < 10) return;
-        dispatch(checkUser(mynumber));
+        dispatch(checkUser(mynumber.replace(/\(|\)|\s/gi, '')));
         let verify = new firebase.auth.RecaptchaVerifier('recaptcha-container', {size: "invisible"});
         auth.signInWithPhoneNumber(mynumber, verify).then((result) => {
             setfinal(result);
