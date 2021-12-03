@@ -11,28 +11,28 @@ const Tab = (props) => {
     const childCnt = {};
     React.Children.forEach(children, (element) => {
       if (!React.isValidElement(element)) return;
-      const { name } = element.props;
-      headers.push(name);
+      const { name, sectionName, setSectionName } = element.props;
+      headers.push({name, sectionName, setSectionName});
       childCnt[name] = element.props.children;
     });
     setTabHeader(headers);
-    setActive(headers[0]);
+    setActive(headers[0].sectionName);
     setChildConent({ ...childCnt });
   }, [props, children]);
 
-  const changeTab = (name) => {
-    setActive(name);
+  const changeTab = (name, setSectionName) => {
+    setSectionName(name);
   };
 
   return (
     <div className="tabs">
         <ul className="tab-header">
-        {tabHeader.map((item) => (
+        {tabHeader.map(({name, setSectionName}) => (
             <li
-                onClick={() => changeTab(item)}
-                key={item}
-                className={item === active ? "active" : ""}>
-                {item}
+                onClick={() => changeTab(name, setSectionName)}
+                key={name}
+                className={name === active ? "active" : ""}>
+                {name}
             </li>
             ))}
         </ul>

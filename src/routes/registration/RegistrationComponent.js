@@ -8,6 +8,10 @@ import OtpInput from 'react-otp-input';
 import auth_back from "../../assets/images/auth_back.png";
 import LoadingComponent from '../../components/loading/LoadingComponent';
 import { checkUser, register } from '../../redux/actions/userActions';
+import { useHistory } from 'react-router';
+import SLUGS from '../../resources/slugs';
+import Toast from '../../components/toast/Toast';
+import { USER_REGISTER_RESET } from '../../redux/constants/userConstants';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -115,6 +119,7 @@ function RegistrationComponent() {
     const theme = useTheme();
     const classes = useStyles({ theme });
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const userRegister = useSelector((state) => state.userRegister);
     const { loadingRegister, dataRegister, errorRegister } = userRegister;
@@ -122,6 +127,7 @@ function RegistrationComponent() {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [date, setDate] = useState('');
+    const [list, setList] = useState([]);
 
     const checkUserReq = useSelector((state) => state.checkUser);
     const { loadingCheckUser, dataCheckUser } = checkUserReq;
@@ -143,11 +149,13 @@ function RegistrationComponent() {
 
     useEffect(() => {
         if(dataRegister) {
+            setList([...list, {id: 1, title: 'Вы успешно зарегистрировались', type: "success"}]);
+            history.push(SLUGS.init);
+        } else if(errorRegister) {
+            setList([...list, {id: 2, title: 'Ошибка', description: errorRegister.toString(), type: "error"}]);
         }
-        if(errorRegister) {
-            alert(errorRegister);
-        }
-    }, [dataRegister, dispatch, dataCheckUser, errorRegister]);
+        dispatch({type: USER_REGISTER_RESET});
+    }, [dataRegister, dispatch, list, history, dataCheckUser, errorRegister]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -201,7 +209,7 @@ function RegistrationComponent() {
             let uid = result.user.uid;
             result.user.getIdToken(true)
             .then(latestToken => {
-                dispatch(register(uid, date.split(".").reverse().join("-"), latestToken, mynumber, name, surname));
+                dispatch(register(uid, date.split(".").reverse().join("-"), latestToken, mynumber.replace(/\(|\)|\s/gi, ''), name, surname));
             });
         }).catch((err) => {
             setOtpWrong(true);
@@ -226,6 +234,7 @@ function RegistrationComponent() {
         <Column className={classes.container}
             vertical='center'
             horizontal='center'>
+            <Toast toastList={list} />
             { loadingRegister ? <LoadingComponent loading /> : null}
             { loadingCheckUser ? <LoadingComponent loading /> : null}
             {show ? <button onClick={onClickBack} className={classes.backButton}>Назад</button> : null}

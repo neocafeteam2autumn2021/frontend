@@ -61,7 +61,6 @@ export default function InputProfile({ userData }) {
     const [surname, setSurname] = useState('');
     const [date, setDate] = useState('');
     const [mynumber, setNumber] = useState('');
-    const [changed, setChanged] = useState(false);
 
     useEffect(() => {
         setName(userData ? userData.name : '');
@@ -69,13 +68,8 @@ export default function InputProfile({ userData }) {
         setDate(userData ? userData.date_of_birth.split("-").reverse().join(".") : '');
         setNumber(userData ? userData.phone_number : '');
       }, [userData]);
-
-    const saveProfileIfo = () => {
-        alert("saved")
-        }
     
     const onChangeDate = (e) => {
-        setChanged(true);
         let val = e.target.value
         let newVal = ""
         if(val.length === 2 && date.length < val.length) newVal = val + "."
@@ -86,7 +80,6 @@ export default function InputProfile({ userData }) {
     }
 
     const onChangePhone = (e) => {
-        setChanged(true);
         let val = e.target.value;
         let newVal = ""
         if(val.length === 1 && mynumber.length < val.length) newVal = "+996 ("
@@ -106,38 +99,30 @@ export default function InputProfile({ userData }) {
                     value={name}
                     className={classes.profileInput}
                     type="text"
-                    onChange={(e) => {
-                        setName(e.target.value);
-                        setChanged(true);}}
-                    required />
+                    onChange={(e) => setName(e.target.value)}
+                    disabled />
                 <div className={classes.kicker}>Фамилия</div>
                 <input
                     value={surname}
                     className={classes.profileInput}
                     type="text"
-                    onChange={(e) => {
-                        setSurname(e.target.value);
-                        setChanged(true);}}
-                    required />
+                    onChange={(e) => setSurname(e.target.value)}
+                    disabled />
                 <div className={classes.kicker}>Дата рождения</div>
                 <input
                     value={date}
                     className={classes.profileInput}
                     type="text"
                     onChange={onChangeDate}
-                    required />
+                    disabled />
                 <div className={classes.kicker}>Номер телефона</div>
                 <input
                     value={mynumber}
                     className={classes.profileInput}
                     type="text"
                     onChange={onChangePhone}
-                    required />
+                    disabled />
             </form>
-            <button
-                className={changed && name.length > 0 && surname.length > 0 && date.length > 0 && mynumber.length > 0 ? `${classes.activeSaveButton} ${classes.button}` : classes.button}
-                onClick={saveProfileIfo}
-                >Сохранить</button>
         </ Column>
     );
 };

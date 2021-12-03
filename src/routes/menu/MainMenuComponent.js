@@ -23,12 +23,12 @@ function MainMenuComponent() {
   useEffect(() => {
     if(menuCategoriesData) {
       dispatch(getMenuFoods(menuCategoriesData));
-    } else if(errorMenuCategories && errorMenuCategories.indexOf("401")) {
+    } else if(errorMenuCategories && errorMenuCategories.toString().indexOf("401") !== -1) {
       const { refresh } = JSON.parse(localStorage.getItem('userInfo'));
       dispatch(refreshToken(refresh));
       dispatch(getMenuCategories());
     } else if(errorMenuCategories) {
-      setList([...list, {id: 1, title: 'Ошибка', description: errorMenuCategories, type: "error"}])
+      setList([...list, {id: 1, title: 'Ошибка', description: errorMenuCategories.toString(), type: "error"}])
     }
   }, [dispatch, menuCategoriesData, errorMenuCategories, list]);
 

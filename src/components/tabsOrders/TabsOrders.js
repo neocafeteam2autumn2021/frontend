@@ -6,15 +6,14 @@ import OrderCard from "../orderCard/OrderCard";
 
 const sections = ["Все", "Новый", "В процессе", "Готово", "Отменено", "Завершено"];
 
-export default function TabsOrders({changeSection, sectionId, data}) {
-  console.log(data);
+export default function TabsOrders({changeSection, sectionId, type, data}) {
   return (
       <div className="tabsContainerOrders">
         <TabOrders>
           {sections.map((section, index) => {
             return <TabPaneOrders name={section} index={index+1} sectionId={sectionId} changeSection={changeSection} key={section}>
               {data.map((order) => {
-                return <OrderCard data={order} key={order.id} />
+                return order.status !== 1 ? <OrderCard data={order} type={type} key={order.id} /> : null
               })}
             </TabPaneOrders>
           })}

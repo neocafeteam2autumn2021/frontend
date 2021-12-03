@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuickOrders } from "../../redux/actions/orderActions";
-import { ADD_QUICK_ORDER_RESET } from "../../redux/constants/orderConstants";
+import { ADD_QUICK_ORDER_RESET, GET_QUICK_ORDERS_RESET } from "../../redux/constants/orderConstants";
 import LoadingComponent from "../loading/LoadingComponent";
 import ModalAccept from "../modal/ModalAccept";
 import ModalCloseAccount from "../modal/ModalCloseAccount";
@@ -31,8 +31,8 @@ const QuickOrder = ({data}) => {
       setList([...list, {id: 1, title: 'Добавлено успешно!', type: "success"}]);
       dispatch(getQuickOrders());
       dispatch({ type: ADD_QUICK_ORDER_RESET });
-    } else if(errorAddQuickOrder) {
-      setList([...list, {id: 2, title: 'Ошибка', description: errorAddQuickOrder, type: "error"}]);
+    } else if(errorAddQuickOrder && errorAddQuickOrder.toString().indexOf("401") === -1) {
+      setList([...list, {id: 2, title: 'Ошибка', description: errorAddQuickOrder.toString(), type: "error"}]);
     }
   }, [dispatch, addQuickOrderData, errorAddQuickOrder, list]);
 
@@ -55,11 +55,11 @@ const QuickOrder = ({data}) => {
             <main className="quickOrderContent">
               <div className="quickOrderContent_title">Заказ М-{data.id}</div>
                 {data.orders.map((order) => {
-                  return <QuickOrderCard data={order} id={order.id} />
+                  return <QuickOrderCard data={order} key={order.id} />
                 })}
             </main>
             <footer>
-              <button className="quickOrderContentAddBtn quickOrderBtn">Добавить ещё</button>
+              <button className="quickOrderContentAddBtn quickOrderBtn" onClick={() => dispatch({ type: GET_QUICK_ORDERS_RESET })}>Добавить ещё</button>
               <div className="quickOrder_total">
                 <div>Итого:</div>
                 <div>{data.the_total_cost} с</div>

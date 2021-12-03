@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cancelModal from '../../assets/images/cancelModal.png';
 import { addQuickOrder } from "../../redux/actions/orderActions";
+import { refreshToken } from "../../redux/actions/userActions";
 import "./modal.css";
 
 const ModalInfo = ({ show, setShow, data }) => {
@@ -9,15 +10,19 @@ const ModalInfo = ({ show, setShow, data }) => {
   const dispatch = useDispatch();
 
   const addQuickOrd = useSelector((state) => state.addQuickOrder);
-  const { addQuickOrderData } = addQuickOrd;
+  const { addQuickOrderData, errorAddQuickOrder } = addQuickOrd;
 
   useEffect(() => {
     if(addQuickOrderData) {
       setShow(false);
-    }
-  }, [addQuickOrderData, setShow]);
+    } else if(errorAddQuickOrder && errorAddQuickOrder.indexOf("401")) {
+      const { refresh } = JSON.parse(localStorage.getItem('userInfo'));
+      dispatch(refreshToken(refresh));
+      }
+  }, [dispatch, addQuickOrderData, setShow, errorAddQuickOrder]);
 
   const onClickAdd = () => dispatch(addQuickOrder(data.id));
+
     return (
       <>
        {

@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./modal.css";
 import menuCardInfo from '../../assets/images/menuCardInfo.png';
+import { useDispatch, useSelector } from "react-redux";
+import { refreshToken } from "../../redux/actions/userActions";
+import { addQuickOrder } from "../../redux/actions/orderActions";
 
 const ModalBeverageCard = ({ showBevCard, setShowBevCard, toggle, data }) => {
+  const dispatch = useDispatch();
 
-  const onClickVolume = () => {
-    setShowBevCard(false);
-  }
+  const addQuickOrd = useSelector((state) => state.addQuickOrder);
+  const { addQuickOrderData, errorAddQuickOrder } = addQuickOrd;
+
+  useEffect(() => {
+    if(addQuickOrderData) {
+      setShowBevCard(false);
+    } else if(errorAddQuickOrder && errorAddQuickOrder.indexOf("401")) {
+      const { refresh } = JSON.parse(localStorage.getItem('userInfo'));
+      dispatch(refreshToken(refresh));
+    }
+  }, [dispatch, addQuickOrderData, setShowBevCard, errorAddQuickOrder]);
     
     return (
       <>
@@ -27,31 +39,13 @@ const ModalBeverageCard = ({ showBevCard, setShowBevCard, toggle, data }) => {
             <div className="beverageCardTitle">{data.name}</div>
             <div className="beverageCardPrices">
               {data.food_volumes.map((item) => {
-                return <div className="beverageCardPrice" onClick={onClickVolume} key={item.id}>
+                return <div className="beverageCardPrice" onClick={() => dispatch(addQuickOrder(data.id, item.id))} key={item.id}>
                   <div className="beverageCardPriceCircle"></div>
                   <div className="beverageCardPriceSize">{item.name.slice(0, 1)}</div>
-                  <div className="beverageCardPriceVolume">250 мл</div>
+                  <div className="beverageCardPriceVolume">{item.volume}</div>
                   <div className="beverageCardPriceSelf">{item.add_cost.slice(0, item.add_cost.length-2)} с</div>
                 </div>
               })}
-              {/* <div className="beverageCardPrice" onClick={onClickVolume}>
-                <div className="beverageCardPriceCircle"></div>
-                <div className="beverageCardPriceSize">S</div>
-                <div className="beverageCardPriceVolume">250 мл</div>
-                <div className="beverageCardPriceSelf">{prices[0]} с</div>
-              </div>
-              <div className="beverageCardPrice" onClick={onClickVolume}>
-                <div className="beverageCardPriceCircle"></div>
-                <div className="beverageCardPriceSize">M</div>
-                <div className="beverageCardPriceVolume">350 мл</div>
-                <div className="beverageCardPriceSelf">{prices[1]} с</div>
-              </div>
-              <div className="beverageCardPrice" onClick={onClickVolume}>
-                <div className="beverageCardPriceCircle"></div>
-                <div className="beverageCardPriceSize">L</div>
-                <div className="beverageCardPriceVolume">450 мл</div>
-                <div className="beverageCardPriceSelf">{prices[2]} с</div>
-              </div> */}
             </div>
           </div>
         </div>

@@ -70,6 +70,7 @@
 .notification-message {
 	margin: 0;
     max-height: 50px;
+	width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -81,10 +82,10 @@
 }
 
 .toast {
-    min-height: 70px;
+    min-height: 50px;
     width: 365px;
 	color: #fff;
-	padding: 20px 15px 20px 10px;
+	padding: 20px 15px 10px 10px;
 }
 
 .notification-container button {

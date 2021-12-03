@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { createUseStyles, useTheme } from 'react-jss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import QuickOrder from '../components/quickOrder/QuickOrder';
 import { SidebarComponent, SidebarContext } from '../components/sidebar';
+import Toast from '../components/toast/Toast';
+import { getQuickOrders } from '../redux/actions/orderActions';
+import { refreshToken } from '../redux/actions/userActions';
 import PrivateRoutes from './PrivateRoutes';
 
 const useStyles = createUseStyles({
@@ -46,19 +49,26 @@ function PrivateSection() {
     const theme = useTheme();
     const classes = useStyles({ theme });
 
+    const dispatch = useDispatch();
+
     const [list, setList] = useState([]);
 
     const quickOrders = useSelector((state) => state.quickOrders);
     const { quickOrdersData, errorQuickOrders } = quickOrders;
 
     useEffect(() => {
-        if(errorQuickOrders) {
+        if(errorQuickOrders && errorQuickOrders.indexOf("401")) {
+            const { refresh } = JSON.parse(localStorage.getItem('userInfo'));
+            dispatch(refreshToken(refresh));
+            dispatch(getQuickOrders());
+        } else if(errorQuickOrders && errorQuickOrders.indexOf("401") === -1) {
             setList([...list, {id: 1, title: 'Ошибка', description: errorQuickOrders, type: "error"}]);
         }
-      }, [errorQuickOrders, list]);
+      }, [errorQuickOrders, dispatch, list]);
 
     return (
         <SidebarContext>
+            <Toast toastList={list} />
             <div className={classes.container}>
                 <SidebarComponent />
                 <div className={classes.mainBlock}>

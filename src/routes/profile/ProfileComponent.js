@@ -43,6 +43,7 @@ function ProfileComponent() {
 
   const dispatch = useDispatch();
 
+  const [sectionName, setSectionName] = useState("Личные данные");
   const [showLogout, setShowLogout] = useState(false);
 
   const onClickLogOut = () => {
@@ -70,7 +71,9 @@ function ProfileComponent() {
               <LoadingComponent loading={loadingProfile} />
             ) : <>
               <Tabs components={[<InputProfile userData={dataProfile ? dataProfile.user : null} />,
-                <Schedule userData={dataProfile ? dataProfile.schedules : null} />]} names={["Личные данные", "График работы"]} />
+                <Schedule userData={dataProfile ? dataProfile.schedules : null} />]}
+                names={["Личные данные", "График работы"]}
+                sectionName={sectionName} setSectionName={setSectionName} />
               <ModalLogOut onClickLogOut={onClickLogOut} showLogout={showLogout} setShowLogout={setShowLogout} />
               <button
                 className={classes.logOutButton}

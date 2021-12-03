@@ -38,7 +38,7 @@ const Toast = props => {
             if (toastList.length && list.length) {
                 deleteToast(toastList[0].id);
             }
-        }, 5000);
+        }, 3000);
         
         return () => {
             clearInterval(interval);
