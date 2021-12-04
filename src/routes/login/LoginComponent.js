@@ -8,6 +8,7 @@ import auth_back from "../../assets/images/auth_back.png";
 import OtpInput from 'react-otp-input';
 import LoadingComponent from '../../components/loading/LoadingComponent';
 import { checkUser, login } from '../../redux/actions/userActions';
+import { USER_REGISTER_RESET } from '../../redux/constants/userConstants';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -165,7 +166,7 @@ function LoginComponent() {
         })
         .catch((err) => {
             alert(err);
-            window.location.reload()
+            window.location.reload();
         })}
 
     // Back
@@ -190,6 +191,7 @@ function LoginComponent() {
     const ValidateOtp = () => {
         if (otp.otp === '' || final === null || !dataCheckUser)
             return;
+        dispatch({type: USER_REGISTER_RESET});
         final.confirm(otp.otp).then((result) => {
             let uid = result.user.uid;
             dispatch(login(uid));

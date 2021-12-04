@@ -4,6 +4,8 @@ import { createUseStyles, useTheme } from 'react-jss';
 import auth_back from "../assets/images/auth_back.png";
 import { useHistory } from 'react-router';
 import SLUGS from '../resources/slugs';
+import Toast from '../components/toast/Toast';
+import { useSelector } from 'react-redux';
 
 const useStyles = createUseStyles((theme) => ({
     container: {
@@ -49,6 +51,9 @@ function InitialPage() {
     const theme = useTheme();
     const classes = useStyles({ theme });
 
+    const userRegister = useSelector((state) => state.userRegister);
+    const { dataRegister } = userRegister;
+
     const onHandleRegister = () => history.push(SLUGS.registry);
     const onHandleLogin = () => history.push(SLUGS.login);
 
@@ -56,6 +61,7 @@ function InitialPage() {
         <Column className={classes.container}
             vertical='center'
             horizontal='center'>
+                 {dataRegister ? <Toast toastList={[{id: 2, title: 'Вы успешно зарегистрировались', type: "success"}]} /> : null }
             <Column className={classes.block} horizontal='center'>
                 <div className={classes.blockTitle}>
                     <svg width="207" height="40" viewBox="0 0 207 40" fill="none" xmlns="http://www.w3.org/2000/svg">

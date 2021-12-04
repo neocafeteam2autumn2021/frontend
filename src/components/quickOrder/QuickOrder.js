@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuickOrders } from "../../redux/actions/orderActions";
+import { getQuickOrders, getTakeawayOrders, releaseTakeawayOrders } from "../../redux/actions/orderActions";
 import { ADD_QUICK_ORDER_RESET, GET_QUICK_ORDERS_RESET } from "../../redux/constants/orderConstants";
 import LoadingComponent from "../loading/LoadingComponent";
 import ModalAccept from "../modal/ModalAccept";
@@ -15,8 +15,8 @@ const QuickOrder = ({data}) => {
 
   const dispatch = useDispatch();
 
-  const [showAccept, setShowAccepted] = useState(false);
-  const onClickAccepted = () => setShowAccepted(!showAccept);
+  const [showAccept, setShowAccept] = useState(false);
+  const onClickAccepted = () => dispatch(releaseTakeawayOrders());
 
   const [showCLoseAcc, setShowCLoseAcc] = useState(false);
   const onClickCLoseAcc = () => setShowCLoseAcc(!showCLoseAcc);
@@ -25,8 +25,20 @@ const QuickOrder = ({data}) => {
 
   const addQuickOrder = useSelector((state) => state.addQuickOrder);
   const { loadingAddQuickOrder, addQuickOrderData, errorAddQuickOrder } = addQuickOrder;
+  const releaseTakeawayOrder = useSelector((state) => state.releaseTakeawayOrder);
+  const { loadingReleaseOrders, releaseOrdersData } = releaseTakeawayOrder;
+
+  const closeOrder = useSelector((state) => state.closeOrder);
+  const { loadingCloseOrder, closeOrderData } = closeOrder;
 
   useEffect(() => {
+    if(releaseOrdersData) {
+      setShowAccept(true);
+    }
+    if(closeOrderData) {
+      dispatch({ type: GET_QUICK_ORDERS_RESET });
+      dispatch(getTakeawayOrders(6));
+    }
     if(addQuickOrderData) {
       setList([...list, {id: 1, title: 'Добавлено успешно!', type: "success"}]);
       dispatch(getQuickOrders());
@@ -34,7 +46,7 @@ const QuickOrder = ({data}) => {
     } else if(errorAddQuickOrder && errorAddQuickOrder.toString().indexOf("401") === -1) {
       setList([...list, {id: 2, title: 'Ошибка', description: errorAddQuickOrder.toString(), type: "error"}]);
     }
-  }, [dispatch, addQuickOrderData, errorAddQuickOrder, list]);
+  }, [dispatch, addQuickOrderData, closeOrderData, errorAddQuickOrder, releaseOrdersData, list]);
 
     
     return (
@@ -44,10 +56,10 @@ const QuickOrder = ({data}) => {
         <div
           className="quickOrderContainer"
         >
-          {loadingAddQuickOrder ? <LoadingComponent loading /> : null}
+          {loadingReleaseOrders || loadingCloseOrder || loadingAddQuickOrder ? <LoadingComponent loading /> : null}
           <Toast toastList={list} />
-          <ModalAccept setAccepted={setAccepted} showAccept={showAccept} onClickAccepted={onClickAccepted} />
-          <ModalCloseAccount setShowCLoseAcc={setShowCLoseAcc} showCLoseAcc={showCLoseAcc} onClickCLoseAcc={onClickCLoseAcc} />
+          <ModalAccept setAccepted={setAccepted} showAccept={showAccept} setShowAccept={setShowAccept} />
+          <ModalCloseAccount data={data} setShowCLoseAcc={setShowCLoseAcc} showCLoseAcc={showCLoseAcc} onClickCLoseAcc={onClickCLoseAcc} />
             <header className="quickOrder_header">
                 <div className="quickOrder_title">
                     На вынос</div>

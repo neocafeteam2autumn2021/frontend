@@ -1,4 +1,4 @@
-import { ADD_QUICK_ORDER_FAIL, ADD_QUICK_ORDER_REQUEST, ADD_QUICK_ORDER_RESET, ADD_QUICK_ORDER_SUCCESS, GET_PLACE_ORDERS_FAIL, GET_PLACE_ORDERS_REQUEST, GET_PLACE_ORDERS_SUCCESS, GET_QUICK_ORDERS_FAIL, GET_QUICK_ORDERS_REQUEST, GET_QUICK_ORDERS_RESET, GET_QUICK_ORDERS_SUCCESS, GET_TAKEAWAY_ORDERS_FAIL, GET_TAKEAWAY_ORDERS_REQUEST, GET_TAKEAWAY_ORDERS_SUCCESS, UPDATE_PLACE_ORDERS_FAIL, UPDATE_PLACE_ORDERS_REQUEST, UPDATE_PLACE_ORDERS_RESET, UPDATE_PLACE_ORDERS_SUCCESS, UPDATE_QUICK_ORDER_FAIL, UPDATE_QUICK_ORDER_REQUEST, UPDATE_QUICK_ORDER_RESET, UPDATE_QUICK_ORDER_SUCCESS, UPDATE_TAKEAWAY_ORDERS_FAIL, UPDATE_TAKEAWAY_ORDERS_REQUEST, UPDATE_TAKEAWAY_ORDERS_RESET, UPDATE_TAKEAWAY_ORDERS_SUCCESS } from "../constants/orderConstants";
+import { ADD_QUICK_ORDER_FAIL, ADD_QUICK_ORDER_REQUEST, ADD_QUICK_ORDER_RESET, ADD_QUICK_ORDER_SUCCESS, CLOSE_QUICK_ORDER_FAIL, CLOSE_QUICK_ORDER_REQUEST, CLOSE_QUICK_ORDER_RESET, CLOSE_QUICK_ORDER_SUCCESS, GET_PLACE_ORDERS_FAIL, GET_PLACE_ORDERS_REQUEST, GET_PLACE_ORDERS_SUCCESS, GET_QUICK_ORDERS_FAIL, GET_QUICK_ORDERS_REQUEST, GET_QUICK_ORDERS_RESET, GET_QUICK_ORDERS_SUCCESS, GET_TAKEAWAY_ORDERS_FAIL, GET_TAKEAWAY_ORDERS_REQUEST, GET_TAKEAWAY_ORDERS_SUCCESS, RELEASE_QUICK_ORDER_FAIL, RELEASE_QUICK_ORDER_REQUEST, RELEASE_QUICK_ORDER_RESET, RELEASE_QUICK_ORDER_SUCCESS, UPDATE_PLACE_ORDERS_FAIL, UPDATE_PLACE_ORDERS_REQUEST, UPDATE_PLACE_ORDERS_RESET, UPDATE_PLACE_ORDERS_SUCCESS, UPDATE_QUICK_ORDER_FAIL, UPDATE_QUICK_ORDER_REQUEST, UPDATE_QUICK_ORDER_RESET, UPDATE_QUICK_ORDER_SUCCESS, UPDATE_TAKEAWAY_ORDERS_FAIL, UPDATE_TAKEAWAY_ORDERS_REQUEST, UPDATE_TAKEAWAY_ORDERS_RESET, UPDATE_TAKEAWAY_ORDERS_SUCCESS } from "../constants/orderConstants";
 
 export const getTakeawayOrdersReducer = (state = {}, action) => {
     switch(action.type) {
@@ -116,6 +116,42 @@ export const getQuickOrdersReducer = (state = {}, action) => {
         case GET_QUICK_ORDERS_FAIL:
             return { loadingQuickOrders: false, errorQuickOrders: action.payload };
         case GET_QUICK_ORDERS_RESET:
+            return {};
+        default:
+            return state;
+    }
+};
+
+export const releaseOrdersReducer = (state = {}, action) => {
+    switch(action.type) {
+        case RELEASE_QUICK_ORDER_REQUEST:
+            return { loadingReleaseOrders: true };
+        case RELEASE_QUICK_ORDER_SUCCESS:
+            return {
+                loadingReleaseOrders: false,
+                releaseOrdersData: action.payload
+             };
+        case RELEASE_QUICK_ORDER_FAIL:
+            return { loadingReleaseOrders: false, errorReleaseOrders: action.payload };
+        case RELEASE_QUICK_ORDER_RESET:
+            return {};
+        default:
+            return state;
+    }
+};
+
+export const closeOrderReducer = (state = {}, action) => {
+    switch(action.type) {
+        case CLOSE_QUICK_ORDER_REQUEST:
+            return { loadingCloseOrder: true };
+        case CLOSE_QUICK_ORDER_SUCCESS:
+            return {
+                loadingCloseOrder: false,
+                closeOrderData: action.payload
+             };
+        case CLOSE_QUICK_ORDER_FAIL:
+            return { loadingCloseOrder: false, errorCloseOrder: action.payload };
+        case CLOSE_QUICK_ORDER_RESET:
             return {};
         default:
             return state;

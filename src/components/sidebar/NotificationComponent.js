@@ -3,6 +3,8 @@ import { Row } from 'simple-flexbox';
 import { createUseStyles, useTheme } from 'react-jss';
 import notification_img from '../../assets/images/notification_img.png';
 import ModalNotification from '../modal/ModalNotification';
+// import { onMessageListener } from '../../firebase';
+// import Notifications from '../etc/Notifications';
 
 const useStyles = createUseStyles((theme) => ({
     activeContainer: {
@@ -32,6 +34,7 @@ const useStyles = createUseStyles((theme) => ({
 function NotificationComponent(props) {
     const theme = useTheme();
     const classes = useStyles({ theme });
+    // const [show, setShow] = useState(false);
 
     const [ isActive, setActive ] = useState(false);
 
@@ -39,9 +42,17 @@ function NotificationComponent(props) {
         setActive(!isActive);
     }
 
+    // onMessageListener()
+    // .then((payload) => {
+    //     setShow(true);
+    //     console.log(payload);
+    // })
+    // .catch((err) => console.log("failed: ", err));
+
     return (
         <div style={{ paddingTop: 13, paddingBottom: 100, width: 70, display: 'flex', justifyContent: 'center' }}>
             <ModalNotification show={isActive} close={setActive} />
+            {/* {!show ? <Notifications /> : null} */}
             <Row
                 className={isActive ?
                     `${classes.container} ${classes.activeContainer}`

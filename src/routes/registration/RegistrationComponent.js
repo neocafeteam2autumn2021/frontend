@@ -127,7 +127,6 @@ function RegistrationComponent() {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [date, setDate] = useState('');
-    const [list, setList] = useState([]);
 
     const checkUserReq = useSelector((state) => state.checkUser);
     const { loadingCheckUser, dataCheckUser } = checkUserReq;
@@ -143,19 +142,21 @@ function RegistrationComponent() {
 
     useEffect(() => {
         if(dataCheckUser) {
-            alert("Вы уже зарегистрированы");
+            setTimeout(function(){
+                window.location.reload();
+                dispatch({type: USER_REGISTER_RESET});
+            }, 2000);
         }
-    }, [dataCheckUser]);
+    }, [dataCheckUser, dispatch]);
 
     useEffect(() => {
         if(dataRegister) {
-            setList([...list, {id: 1, title: 'Вы успешно зарегистрировались', type: "success"}]);
             history.push(SLUGS.init);
+            setTimeout(function(){ dispatch({type: USER_REGISTER_RESET}); }, 3000);
         } else if(errorRegister) {
-            setList([...list, {id: 2, title: 'Ошибка', description: errorRegister.toString(), type: "error"}]);
+            setTimeout(function(){ dispatch({type: USER_REGISTER_RESET}); }, 2000);
         }
-        dispatch({type: USER_REGISTER_RESET});
-    }, [dataRegister, dispatch, list, history, dataCheckUser, errorRegister]);
+    }, [dataRegister, dispatch, history, errorRegister]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -234,9 +235,9 @@ function RegistrationComponent() {
         <Column className={classes.container}
             vertical='center'
             horizontal='center'>
-            <Toast toastList={list} />
-            { loadingRegister ? <LoadingComponent loading /> : null}
-            { loadingCheckUser ? <LoadingComponent loading /> : null}
+            {errorRegister ? <Toast toastList={[{id: 2, title: 'Ошибка', description: errorRegister.toString(), type: "error"}]} /> : null}
+            {dataCheckUser ? <Toast toastList={[{id: 3, title: 'Вы уже зарегистрированы', type: "error"}]} /> : null}
+            { loadingRegister || loadingCheckUser ? <LoadingComponent loading /> : null}
             {show ? <button onClick={onClickBack} className={classes.backButton}>Назад</button> : null}
             <Column className={classes.block} horizontal='center'>
                 <div style={{ display: showRegister ? "block" : "none" }}>
@@ -273,7 +274,7 @@ function RegistrationComponent() {
                 </div>
                 <div className={classes.innerBlock} style={{ display: !show && !showRegister ? "flex" : "none" }}>
                     <div className={classes.blockTitle}>
-                        Вход
+                        Регистрация
                     </div>
                     <div className={classes.kicker} >Номер телефона</div>
                     <input

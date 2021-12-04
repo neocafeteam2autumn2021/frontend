@@ -1,12 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import cancelModal from '../../assets/images/cancelModal.png';
+import { closeOrder } from "../../redux/actions/orderActions";
 import "./modal.css";
 
-const ModalCloseAccount = ({ showCLoseAcc, onClickCLoseAcc, setShowCLoseAcc }) => {
+const ModalCloseAccount = ({ data, showCLoseAcc, onClickCLoseAcc, setShowCLoseAcc }) => {
+
+  const dispatch = useDispatch();
 
   const onClickAccept = () => {
     setShowCLoseAcc(true);
     onClickCLoseAcc(!showCLoseAcc);
+    dispatch(closeOrder(data.id));
   }
     
     return (
@@ -35,42 +40,23 @@ const ModalCloseAccount = ({ showCLoseAcc, onClickCLoseAcc, setShowCLoseAcc }) =
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Капучино:</td>
-                    <td>350 мл</td>
-                    <td>130 с</td>
-                    <td>1 шт</td>
-                    <td>130 с</td>
+                  {data.orders && data.orders.map((order) => {
+                    return <tr key={order.id}>
+                    <td>{order && order.food.name}</td>
+                    <td>{order.chosen_food_measure && order.chosen_food_measure.volume}</td>
+                    <td>{order.chosen_food_measure && (order.chosen_food_measure.add_cost * 1) + ' c'}</td>
+                    <td>{order && order.quantity} шт</td>
+                    <td>{order && order.total_cost * 1} с</td>
                   </tr>
-                  <tr>
-                    <td>Шоколадный сироп:</td>
-                    <td></td>
-                    <td>15 с</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>Латте:</td>
-                    <td>250</td>
-                    <td>100 с</td>
-                    <td>1 шт</td>
-                    <td>100 с</td>
-                  </tr>
-                  <tr>
-                    <td>Тирамиссу:</td>
-                    <td></td>
-                    <td>240 с</td>
-                    <td>2 шт</td>
-                    <td>140 с</td>
-                  </tr>
+                  })}
                 </tbody>
               </table>
             </main>
             <footer className="modal_footer">
               <div className="closeAccContainer_block">
-                <div className="closeAccContainer_item">И того:<span>850 с</span></div>
-                <div className="closeAccContainer_item">Списание:<span>68</span>балов</div>
-                <div className="closeAccContainer_item">Со скидкой:<span>782 с</span></div>
+                <div className="closeAccContainer_item">И того:<span>{data.the_total_cost * 1} с</span></div>
+                <div className="closeAccContainer_item">Списание:<span>{data.used_bonuses}</span>балов</div>
+                <div className="closeAccContainer_item">Со скидкой:<span>{data.the_total_cost * 1} с</span></div>
               </div>
               <button onClick={onClickAccept} className="modal_footerAddBtn button">Закрыть счёт</button>
             </footer>

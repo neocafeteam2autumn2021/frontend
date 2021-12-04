@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { ADD_QUICK_ORDER_FAIL, ADD_QUICK_ORDER_REQUEST, ADD_QUICK_ORDER_SUCCESS, GET_PLACE_ORDERS_FAIL, GET_PLACE_ORDERS_REQUEST, GET_PLACE_ORDERS_SUCCESS, GET_QUICK_ORDERS_FAIL, GET_QUICK_ORDERS_REQUEST, GET_QUICK_ORDERS_SUCCESS, GET_TAKEAWAY_ORDERS_FAIL, GET_TAKEAWAY_ORDERS_REQUEST, GET_TAKEAWAY_ORDERS_SUCCESS, UPDATE_PLACE_ORDERS_FAIL, UPDATE_PLACE_ORDERS_REQUEST, UPDATE_PLACE_ORDERS_SUCCESS, UPDATE_QUICK_ORDER_FAIL, UPDATE_QUICK_ORDER_REQUEST, UPDATE_TAKEAWAY_ORDERS_FAIL, UPDATE_TAKEAWAY_ORDERS_REQUEST, UPDATE_TAKEAWAY_ORDERS_SUCCESS } from '../constants/orderConstants';
+import { ADD_QUICK_ORDER_FAIL, ADD_QUICK_ORDER_REQUEST, ADD_QUICK_ORDER_SUCCESS, CLOSE_QUICK_ORDER_FAIL, CLOSE_QUICK_ORDER_REQUEST, CLOSE_QUICK_ORDER_SUCCESS, GET_PLACE_ORDERS_FAIL, GET_PLACE_ORDERS_REQUEST, GET_PLACE_ORDERS_SUCCESS, GET_QUICK_ORDERS_FAIL, GET_QUICK_ORDERS_REQUEST, GET_QUICK_ORDERS_SUCCESS, GET_TAKEAWAY_ORDERS_FAIL, GET_TAKEAWAY_ORDERS_REQUEST, GET_TAKEAWAY_ORDERS_SUCCESS, RELEASE_QUICK_ORDER_FAIL, RELEASE_QUICK_ORDER_REQUEST, RELEASE_QUICK_ORDER_SUCCESS, UPDATE_PLACE_ORDERS_FAIL, UPDATE_PLACE_ORDERS_REQUEST, UPDATE_PLACE_ORDERS_SUCCESS, UPDATE_QUICK_ORDER_FAIL, UPDATE_QUICK_ORDER_REQUEST, UPDATE_TAKEAWAY_ORDERS_FAIL, UPDATE_TAKEAWAY_ORDERS_REQUEST, UPDATE_TAKEAWAY_ORDERS_SUCCESS } from '../constants/orderConstants';
 
 export const getTakeawayOrders = (id) => async (dispatch, getState) => {
   dispatch({
@@ -149,5 +149,43 @@ export const getQuickOrders = () => async (dispatch, getState) => {
         dispatch({ type: GET_QUICK_ORDERS_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: GET_QUICK_ORDERS_FAIL, payload: error.message });
+    }
+};
+
+export const releaseTakeawayOrders = () => async (dispatch, getState) => {
+    dispatch({
+        type: RELEASE_QUICK_ORDER_REQUEST
+    });
+    const {
+        userSignin: { userInfo },
+    } = getState();
+    try {
+        await Axios.put(`https://neocafe-staging.herokuapp.com/fast_order/release_takeaway_order/`, {}, {
+            headers: {
+                'Authorization': `Bearer ${userInfo.access}`
+            }
+        });
+        dispatch({ type: RELEASE_QUICK_ORDER_SUCCESS, payload: true });
+    } catch (error) {
+        dispatch({ type: RELEASE_QUICK_ORDER_FAIL, payload: error });
+    }
+};
+
+export const closeOrder = (id) => async (dispatch, getState) => {
+    dispatch({
+        type: CLOSE_QUICK_ORDER_REQUEST
+    });
+    const {
+        userSignin: { userInfo },
+    } = getState();
+    try {
+        await Axios.put(`https://neocafe-staging.herokuapp.com/orders/4/${id}/close_takeaway_order/`, {}, {
+            headers: {
+                'Authorization': `Bearer ${userInfo.access}`
+            }
+        });
+        dispatch({ type: CLOSE_QUICK_ORDER_SUCCESS, payload: true });
+    } catch (error) {
+        dispatch({ type: CLOSE_QUICK_ORDER_FAIL, payload: error });
     }
 };

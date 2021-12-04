@@ -13,7 +13,7 @@ export default function TabsOrders({changeSection, sectionId, type, data}) {
           {sections.map((section, index) => {
             return <TabPaneOrders name={section} index={index+1} sectionId={sectionId} changeSection={changeSection} key={section}>
               {data.map((order) => {
-                return order.status !== 1 ? <OrderCard data={order} type={type} key={order.id} /> : null
+                return <OrderCard data={order} type={type} key={order.id} />
               })}
             </TabPaneOrders>
           })}
